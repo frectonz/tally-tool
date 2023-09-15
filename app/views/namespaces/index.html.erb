@@ -1,13 +1,10 @@
 <p style="color: green"><%= notice %></p>
 
-<main class="namespaces">
-  <h1>Namespaces</h1>
+<h1 class="title">Namespaces</h1>
 
-  <section class="namespaces-list">
-    <div class="new-namespace">
-      <%= link_to "New Namespace", new_namespace_path %>
-    </div>
-    <%= render @namespaces %>
-  </section>
-</main>
-
+<section class="namespaces-list">
+  <div class="new-namespace">
+    <%= link_to "New Namespace", new_namespace_path %>
+  </div>
+  <%= render @namespaces %>
+</section>

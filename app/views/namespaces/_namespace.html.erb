@@ -1,4 +1,4 @@
-<div class="namespace" id="<%= dom_id namespace %>">
+<a href="<%= namespace_path namespace %>" class="namespace" id="<%= dom_id namespace %>">
   <h1>
     <%= namespace.name %>
   </h1>
@@ -6,6 +6,4 @@
   <p>
     <%= pluralize namespace.tallies.count, "tally" %>
   </p>
-
-  <%= link_to "View", namespace %>
-</div>
+</a>
