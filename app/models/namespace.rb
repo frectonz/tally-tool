@@ -3,5 +3,5 @@ class Namespace < ApplicationRecord
   validates :name, uniqueness: { case_sensitive: false }
   validates :name, format: { with: /\A[\w]+\z/, message: "can only contain letters and numbers" }
 
-  has_many :tallies
+  has_many :tallies, dependent: :destroy
 end
