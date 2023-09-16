@@ -1,4 +1,6 @@
-<div id="<%= dom_id tally %>">
-  <h3>Name: <%= tally.name %></h3>
-  <p>Count: <%= tally.count %></p>
-</div>
+<tr id="<%= dom_id tally %>">
+  <td class="bold"><%= tally.name %></td>
+  <td class="bold"><%= tally.count %></td>
+  <td><%= time_tag tally.created_at, "data-local": "time-ago" %></td>
+  <td><%= time_tag tally.updated_at, "data-local": "time-ago" %></td>
+</tr>

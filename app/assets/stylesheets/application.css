@@ -113,7 +113,12 @@ input[type="submit"] {
  font-weight: bold;
 }
 
-.back-link > a {
+.link {
+ display: flex;
+ gap: 1rem;
+}
+
+.link > a {
  font-size: 1.2rem;
  text-decoration: underline;
 }
@@ -131,4 +136,47 @@ form {
 .field_with_errors {
  color: red;
  --secondary: red;
+}
+
+table {
+ width: 100%;
+ text-align: left;
+ margin: 1rem 0;
+ font-size: 150%;
+}
+
+th {
+ padding: .3rem .5rem;
+}
+
+td {
+  padding: 0rem .5rem;
+}
+
+th {
+ color: var(--primary);
+ background-color: var(--secondary)
+}
+
+.bold {
+ font-weight: bold;
+}
+
+.highlight {
+ background-color: var(--secondary);
+ color: var(--primary);
+ padding: 0 .3rem;
+}
+
+.destroy {
+ padding: .2rem .5rem;
+ width: fit-content;
+ border: none;
+
+ color: var(--primary);
+ background-color: red;
+ cursor: pointer;
+
+ font-size: 1.3rem;
+ font-weight: bold;
 }

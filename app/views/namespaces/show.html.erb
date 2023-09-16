@@ -1,9 +1,10 @@
-<h1><%= @namespace.name %></h2>
+<div class="link">
+  <%= link_to "Back to namespaces", namespaces_path %>
+  <%= link_to "Edit this namespace", edit_namespace_path(@namespace) %>
+</div>
+
+<h1>Tallies in namespace <span class="highlight"><%= @namespace.name %></span></h1>
+
 <%= render "namespaces/tallies", namespace: @namespace %>
 
-<section>
-  <%= link_to "Edit this namespace", edit_namespace_path(@namespace) %> |
-  <%= link_to "Back to namespaces", namespaces_path %>
-
-  <%= button_to "Destroy this namespace", @namespace, method: :delete %>
-</section>
+<%= button_to "destroy this namespace", @namespace, method: :delete, class: "destroy" %>
