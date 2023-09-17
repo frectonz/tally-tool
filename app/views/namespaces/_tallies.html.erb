@@ -1,11 +1,23 @@
-<table class="tallies">
-  <thead>
-    <tr>
-      <th>name</th>
-      <th>count</th>
-      <th>created</th>
-      <th>last update</th>
-    </tr>
-  </thead>
-  <%= render namespace.tallies %>
-</table>
+<% if namespace.tallies.present? %>
+  <table class="tallies">
+    <thead>
+      <tr>
+        <th>name</th>
+        <th>count</th>
+        <th>created</th>
+        <th>last update</th>
+      </tr>
+    </thead>
+    <%= render namespace.tallies %>
+  </table>
+<% else %>
+  <% origin = "#{request.protocol}#{request.host_with_port}" %>
+  <% sample = "#{origin}/namespaces/#{namespace.name}/tallies/test" %>
+  <div class="tallies empty">
+    <h3>This namespace doesn't have a tally create one using one of the following.</h3>
+    <div>
+      <pre>http PUT <%= sample %> op==INC</pre>
+      <pre>curl -X PUT -d op=INC <%= sample %></pre>
+    </div>
+  </div>
+<% end %>

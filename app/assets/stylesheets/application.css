@@ -16,8 +16,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
- --primary:  #111;
- --secondary: #394;
+ --primary:  #fff;
+ --secondary: #000;
  --teritiary: #8C3333;
 }
 
@@ -25,7 +25,7 @@
  margin: 0;
  padding: 0;
  box-sizing: border-box;
- font-family: 'Darker Grotesque', sans-serif;
+ font-family: monospace;
 }
 
 a {
@@ -83,7 +83,7 @@ main > h1 {
 }
 
 .namespace:hover, .namespace:focus {
- margin: 1rem;
+ transform: scale(.9);
 }
 
 .new-namespace {
@@ -109,7 +109,7 @@ input[type="text"] {
 
 
 input[type="submit"] {
- padding: 0 10px;
+ padding: 5px 10px;
  color: var(--primary);
  background-color: var(--secondary);
  font-weight: bold;
@@ -118,6 +118,7 @@ input[type="submit"] {
 .link {
  display: flex;
  gap: 1rem;
+ margin-bottom: 10px;
 }
 
 .link > a {
@@ -141,10 +142,10 @@ form {
 }
 
 table {
- width: 100%;
  text-align: left;
- margin: 1rem 0;
  font-size: 150%;
+ width: 100%;
+ margin: 1rem 0;
 }
 
 th {
@@ -185,4 +186,23 @@ th {
 
 .notice {
  color: var(--secondary);
+}
+
+.empty {
+ padding: 2rem 0;
+}
+
+.empty > h3 {
+ margin-bottom: 1rem;
+}
+
+.empty > div {
+ display: grid;
+ gap: 5px;
+}
+
+.empty pre {
+ padding: 1rem;
+ color: var(--primary);
+ background-color: var(--secondary);
 }
