@@ -191,6 +191,18 @@
     targets = [];
     version = "0.1.1";
   };
+  bcrypt = {
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "14crcsmcsyiskr9xzgzcfz2dr74zg1jvavrrxpf5vnn9q75fakz9";
+      target = "ruby";
+      type = "gem";
+    };
+    targets = [];
+    version = "3.1.19";
+  };
   benchmark = {
     groups = ["default" "development"];
     platforms = [];
@@ -702,6 +714,19 @@
     };
     targets = [];
     version = "3.2.2.3";
+  };
+  passwordless = {
+    dependencies = ["bcrypt" "rails"];
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "0p44876naylhxkamsar8c4821iwkjd4j6d5j3cm7bwqwkwjzahm8";
+      target = "ruby";
+      type = "gem";
+    };
+    targets = [];
+    version = "0.12.0";
   };
   psych = {
     dependencies = ["stringio"];

@@ -17,8 +17,7 @@
 
 :root {
  --primary:  #fff;
- --secondary: #000;
- --teritiary: #8C3333;
+ --secondary: #ff6600;
 }
 
 * {
@@ -102,11 +101,10 @@ input {
  color: var(--seconadry);
 }
 
-input[type="text"] {
+input[type="text"], input[type="email"] {
  padding: 0 10px;
  border: 1px solid var(--secondary);
 }
-
 
 input[type="submit"] {
  padding: 5px 10px;
@@ -133,7 +131,11 @@ input[type="submit"] {
 
 form {
  display: grid;
- gap: 10px;
+ gap: 20px;
+}
+
+label {
+ display: block;
 }
 
 .field_with_errors {

@@ -1,0 +1,16 @@
+<%= form_with(model: user) do |form| %>
+  <div>
+    <%= form.label :email, "email" %>
+    <%= form.email_field :email %>
+
+    <% if user.errors[:email].present? %>
+      <% user.errors[:email].each do |error| %>
+        <p class="error-text"><%= error %></p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit "register" %>
+  </div>
+<% end %>
