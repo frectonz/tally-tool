@@ -8,15 +8,18 @@ class UsersController < ApplicationController
 
     if @user.save
       # TODO: create passwordless session
-      redirect_to(@user, flash: { notice: 'Welcome!' })
+      render(:dashboard, flash: { notice: 'Welcome!' })
     else
       render(:register)
     end
   end
 
+  def dashboard
+  end
+
   private
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:email)
+      params.require(:user).permit(:username, :email)
     end
 end

@@ -1,5 +1,7 @@
 <%= form_with model: user, url: "/register" do |form| %>
   <div>
+    <%= form.label :email, "username" %>
+    <%= form.text_field :username %>
     <%= form.label :email, "email" %>
     <%= form.email_field :email %>
 
