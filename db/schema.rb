@@ -10,11 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_024134) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_20_034658) do
   create_table "namespaces", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.string "token", null: false
+    t.datetime "timeout_at", null: false
+    t.datetime "expires_at", null: false
+    t.datetime "claimed_at"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
   create_table "tallies", force: :cascade do |t|
@@ -33,5 +44,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_024134) do
     t.string "username"
   end
 
+  add_foreign_key "sessions", "users"
   add_foreign_key "tallies", "namespaces"
 end

@@ -7,8 +7,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      # TODO: create passwordless session
-      render(:dashboard, flash: { notice: 'Welcome!' })
+      session = @user.sessions.create
+      redirect_to(:dashboard, flash: { notice: 'Welcome!' })
     else
       render(:register)
     end

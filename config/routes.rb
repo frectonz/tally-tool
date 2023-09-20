@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get "/register", to: "users#register"
   post "/register", to: "users#create"
 
+  get "/dashboard", to: "users#dashboard"
+
   root "home#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 end

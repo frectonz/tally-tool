@@ -11,4 +11,6 @@ class User < ApplicationRecord
               with: /\A[\w]+\z/,
               message: "can only contain letters and numbers"
             }
+
+  has_many :sessions, dependent: :destroy
 end
