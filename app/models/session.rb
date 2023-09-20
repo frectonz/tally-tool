@@ -11,10 +11,19 @@ class Session < ApplicationRecord
 
   scope(
     :available,
-    lambda { where("expires_at > ?", Time.current) }
+    lambda { where("expires_at > ? AND claimed_at IS NULL", Time.current) }
   )
 
   belongs_to :user
+
+  def timed_out?
+    timeout_at <= Time.current
+  end
+
+  def claim
+    self.claimed_at = Time.current
+    self.save
+  end
 
   CHARS = [*"A".."Z", *"0".."9"].freeze
   def set_defaults

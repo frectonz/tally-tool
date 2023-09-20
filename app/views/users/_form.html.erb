@@ -1,7 +1,16 @@
 <%= form_with model: user, url: "/register" do |form| %>
   <div>
-    <%= form.label :email, "username" %>
+    <%= form.label :username, "username" %>
     <%= form.text_field :username %>
+
+    <% if user.errors[:username].present? %>
+      <% user.errors[:username].each do |error| %>
+        <p class="error-text"><%= error %></p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div>
     <%= form.label :email, "email" %>
     <%= form.email_field :email %>
 

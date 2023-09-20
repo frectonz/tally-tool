@@ -15,11 +15,32 @@ class UsersController < ApplicationController
     end
   end
 
+  def verify
+    @session = Session.available.find_by(token: params[:token])
+
+    unless @session
+      @message = "Token doesn't exist"
+    else
+      if @session.timed_out?
+        @message = "Token timed out"
+      else
+        @message = "Valid token"
+        @session.claim
+
+        cookies.signed[:session_id] = {
+          :value => @session.id,
+          :expires => 1.year.from_now
+        }
+      end
+    end
+
+    render :verify
+  end
+
   def dashboard
   end
 
   private
-    # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:username, :email)
     end

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get "/register", to: "users#register"
   post "/register", to: "users#create"
+  get "/verify/:token", to: "users#verify"
 
   get "/dashboard", to: "users#dashboard"
 
