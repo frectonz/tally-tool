@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
-  include Passwordless::ControllerHelpers
-
-  def index
+  def register
     @user = User.new
   end
 
@@ -9,14 +7,11 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      sign_in(build_passwordless_session(@user))
+      # TODO: create passwordless session
       redirect_to(@user, flash: { notice: 'Welcome!' })
     else
-      render(:index)
+      render(:register)
     end
-  end
-
-  def show
   end
 
   private

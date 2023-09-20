@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
-  passwordless_for :users, at: '/', as: :auth
-
   resources :namespaces do
     resources :tallies
   end
-  resources :users
+
+  get "/register", to: "users#register"
+  post "/register", to: "users#create"
 
   root "home#index"
-
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 end

@@ -1,4 +1,4 @@
-<%= form_with(model: user) do |form| %>
+<%= form_with model: user, url: "/register" do |form| %>
   <div>
     <%= form.label :email, "email" %>
     <%= form.email_field :email %>

@@ -191,18 +191,6 @@
     targets = [];
     version = "0.1.1";
   };
-  bcrypt = {
-    groups = ["default"];
-    platforms = [];
-    source = {
-      remotes = ["https://rubygems.org"];
-      sha256 = "14crcsmcsyiskr9xzgzcfz2dr74zg1jvavrrxpf5vnn9q75fakz9";
-      target = "ruby";
-      type = "gem";
-    };
-    targets = [];
-    version = "3.1.19";
-  };
   benchmark = {
     groups = ["default" "development"];
     platforms = [];
@@ -715,19 +703,6 @@
     targets = [];
     version = "3.2.2.3";
   };
-  passwordless = {
-    dependencies = ["bcrypt" "rails"];
-    groups = ["default"];
-    platforms = [];
-    source = {
-      remotes = ["https://rubygems.org"];
-      sha256 = "0p44876naylhxkamsar8c4821iwkjd4j6d5j3cm7bwqwkwjzahm8";
-      target = "ruby";
-      type = "gem";
-    };
-    targets = [];
-    version = "0.12.0";
-  };
   psych = {
     dependencies = ["stringio"];
     groups = ["default" "development" "test"];
@@ -1144,12 +1119,12 @@
     platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "0bmjgbv8158klwp2r3klxjwaj93nh1sbl4xvj9wsha0ic478avz7";
+      sha256 = "0p3l7v619hwfi781l3r7ypyv1l8hivp09r18kmkn6g11c4yr1pc2";
       target = "ruby";
       type = "gem";
     };
     targets = [];
-    version = "2.2.0";
+    version = "2.3.0";
   };
   timeout = {
     groups = ["default"];
@@ -1219,12 +1194,12 @@
     platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "0dib6p55sl606qb4vpwrvj5wh881kk4aqn2zpfapf8ckx7g14jw8";
+      sha256 = "1a4zc8d0d91c3xqwapda3j3zgpfwdbj76hkb69xn6qvfkfks9h9c";
       target = "ruby";
       type = "gem";
     };
     targets = [];
-    version = "1.2.9";
+    version = "1.2.10";
   };
   websocket-driver = {
     dependencies = ["websocket-extensions"];

@@ -71,5 +71,3 @@ group :test do
   gem "selenium-webdriver"
 
 end
-
-gem "passwordless", "~> 0.12.0"
