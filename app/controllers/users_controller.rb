@@ -8,7 +8,8 @@ class UsersController < ApplicationController
 
     if @user.save
       session = @user.sessions.create
-      redirect_to(:dashboard, flash: { notice: 'Welcome!' })
+      SessionMailer.with(session: session).login_email.deliver_later
+      redirect_to("/", flash: { notice: 'Welcome!' })
     else
       render(:register)
     end
