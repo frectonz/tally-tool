@@ -50,9 +50,10 @@
             buildInputs = (
               let
                 railsInputs = [ rubyEnv bundixcli ] ++ (with pkgs; [ nodejs yarn rufo ]);
-                utilityInputs = with pkgs; [ httpie ];
+                nodeJsInputs = with pkgs; [ nodePackages.pnpm ];
+                utilityInputs = with pkgs; [ httpie nil ];
               in
-              railsInputs ++ utilityInputs
+              railsInputs ++ nodeJsInputs ++ utilityInputs
             );
           };
         };
