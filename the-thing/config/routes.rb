@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :namespaces, path: "/dashboard" do
+  resources :namespaces do
     resources :tallies
   end
 

@@ -29,7 +29,7 @@
           overlays = [ bob-ruby.overlays.default ];
         };
         rubyNix = ruby-nix.lib pkgs;
-        gemset = import ./gemset.nix;
+        gemset = import ./the-thing/gemset.nix;
         # See available versions here: https://github.com/bobvanderlinden/nixpkgs-ruby/blob/master/ruby/versions.json
         ruby = pkgs."ruby-3.2";
         bundixcli = bundix.packages.${system}.default;
