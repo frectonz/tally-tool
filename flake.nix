@@ -1,5 +1,5 @@
 {
-  description = "A simple ruby app demo";
+  description = "Tally tool flake";
 
   nixConfig = {
     extra-substituters = "https://nixpkgs-ruby.cachix.org";
@@ -29,30 +29,31 @@
           overlays = [ bob-ruby.overlays.default ];
         };
         rubyNix = ruby-nix.lib pkgs;
-
         gemset = import ./gemset.nix;
+        # See available versions here: https://github.com/bobvanderlinden/nixpkgs-ruby/blob/master/ruby/versions.json
+        ruby = pkgs."ruby-3.2";
+        bundixcli = bundix.packages.${system}.default;
 
         # If you want to override gem build config, see
         #   https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/ruby-modules/gem-config/default.nix
         gemConfig = { };
 
-        # See available versions here: https://github.com/bobvanderlinden/nixpkgs-ruby/blob/master/ruby/versions.json
-        ruby = pkgs."ruby-3.2";
-
-        bundixcli = bundix.packages.${system}.default;
-      in
-      rec {
-        inherit (rubyNix {
+        rubyEnv = (rubyNix {
           inherit gemset ruby;
-          name = "my-rails-app";
+          name = "tally-tool";
           gemConfig = pkgs.defaultGemConfig // gemConfig;
-        })
-          env;
-
+        }).env;
+      in
+      {
         devShells = {
           default = pkgs.mkShell {
-            buildInputs = [ env bundixcli ]
-              ++ (with pkgs; [ nodejs yarn rufo httpie ]);
+            buildInputs = (
+              let
+                railsInputs = [ rubyEnv bundixcli ] ++ (with pkgs; [ nodejs yarn rufo ]);
+                utilityInputs = with pkgs; [ httpie ];
+              in
+              railsInputs ++ utilityInputs
+            );
           };
         };
 
