@@ -13,4 +13,5 @@ class User < ApplicationRecord
             }
 
   has_many :sessions, dependent: :destroy
+  has_many :namespaces, dependent: :destroy
 end

@@ -1,9 +1,10 @@
 class NamespacesController < ApplicationController
+  before_action :get_current_user
   before_action :set_namespace, only: %i[ show edit update destroy ]
 
   # GET /namespaces or /namespaces.json
   def index
-    @namespaces = Namespace.all
+    @namespaces = @current_user.namespaces.all
   end
 
   # GET /namespaces/1 or /namespaces/1.json
@@ -12,7 +13,7 @@ class NamespacesController < ApplicationController
 
   # GET /namespaces/new
   def new
-    @namespace = Namespace.new
+    @namespace = @current_user.namespaces.new
   end
 
   # GET /namespaces/1/edit
@@ -21,7 +22,7 @@ class NamespacesController < ApplicationController
 
   # POST /namespaces or /namespaces.json
   def create
-    @namespace = Namespace.new(namespace_params)
+    @namespace = @current_user.namespaces.new(namespace_params)
 
     respond_to do |format|
       if @namespace.save
@@ -60,7 +61,9 @@ class NamespacesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_namespace
-      @namespace = Namespace.find_by(id: params[:id]) || Namespace.find_by(name: params[:id])
+      @namespace = @current_user.namespaces.find_by(id: params[:id]) || 
+                   @current_user.namespaces.find_by(name: params[:id])
+
       if !@namespace
         render json: { error: 'Namespace not found' }, status: :not_found
       end
