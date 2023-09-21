@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :namespaces do
+  resources :namespaces, path: "/dashboard" do
     resources :tallies
   end
 
@@ -10,8 +10,6 @@ Rails.application.routes.draw do
 
   get "/login", to: "users#login_get"
   post "/login", to: "users#login_post"
-
-  get "/dashboard", to: "users#dashboard"
 
   root "home#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

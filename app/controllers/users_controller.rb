@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     if @user.save
       session = @user.sessions.create
       SessionMailer.with(session: session).login_email.deliver_later
-      redirect_to("/", flash: { notice: 'Welcome!' })
+      redirect_to("/dashboard", flash: { notice: 'Welcome!' })
     else
       render(:register)
     end
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     if @user
       session = @user.sessions.create
       SessionMailer.with(session: session).login_email.deliver_later
-      redirect_to("/", flash: { notice: 'Welcome!' })
+      redirect_to("/dashboard", flash: { notice: 'Welcome!' })
     else
       @error = "user was not found"
       render(:login)
@@ -54,9 +54,6 @@ class UsersController < ApplicationController
     end
 
     render :verify
-  end
-
-  def dashboard
   end
 
   private

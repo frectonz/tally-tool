@@ -1,6 +1,5 @@
 class NamespacesController < ApplicationController
   before_action :set_namespace, only: %i[ show edit update destroy ]
-  before_action :require_user!
 
   # GET /namespaces or /namespaces.json
   def index
