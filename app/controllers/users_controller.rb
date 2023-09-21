@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     if @user.save
       session = @user.sessions.create
       SessionMailer.with(session: session).login_email.deliver_later
-      redirect_to("/dashboard", flash: { notice: 'Welcome!' })
+      render(:email)
     else
       render(:register)
     end
@@ -21,13 +21,12 @@ class UsersController < ApplicationController
   end
 
   def login_post
-    puts "Email: #{params[:email]}"
     @user = User.find_by(email: params[:email])
 
     if @user
       session = @user.sessions.create
       SessionMailer.with(session: session).login_email.deliver_later
-      redirect_to("/dashboard", flash: { notice: 'Welcome!' })
+      render(:email)
     else
       @error = "user was not found"
       render(:login)
