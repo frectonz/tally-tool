@@ -1,0 +1,16 @@
+<h1>welcome back to tally tool</h1>
+
+<%= form_with url: "/login" do |form| %>
+  <div>
+    <%= form.label :email, "email" %>
+    <%= form.email_field :email %>
+
+    <% if @error %>
+      <p class="error-text"><%= @error %></p>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit "login" %>
+  </div>
+<% end %>

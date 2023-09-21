@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
-  def register
+  def register_get
     @user = User.new
+    render(:register)
   end
 
-  def create
+  def register_post
     @user = User.new(user_params)
 
     if @user.save
@@ -12,6 +13,24 @@ class UsersController < ApplicationController
       redirect_to("/", flash: { notice: 'Welcome!' })
     else
       render(:register)
+    end
+  end
+
+  def login_get
+    render(:login)
+  end
+
+  def login_post
+    puts "Email: #{params[:email]}"
+    @user = User.find_by(email: params[:email])
+
+    if @user
+      session = @user.sessions.create
+      SessionMailer.with(session: session).login_email.deliver_later
+      redirect_to("/", flash: { notice: 'Welcome!' })
+    else
+      @error = "user was not found"
+      render(:login)
     end
   end
 
