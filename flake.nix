@@ -30,9 +30,7 @@
         };
         rubyNix = ruby-nix.lib pkgs;
 
-        # TODO generate gemset.nix with bundix
-        gemset =
-          if builtins.pathExists ./gemset.nix then import ./gemset.nix else { };
+        gemset = import ./gemset.nix;
 
         # If you want to override gem build config, see
         #   https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/ruby-modules/gem-config/default.nix
@@ -42,7 +40,8 @@
         ruby = pkgs."ruby-3.2";
 
         bundixcli = bundix.packages.${system}.default;
-      in rec {
+      in
+      rec {
         inherit (rubyNix {
           inherit gemset ruby;
           name = "my-rails-app";
@@ -50,12 +49,13 @@
         })
           env;
 
-        devShells = rec {
-          default = dev;
-          dev = pkgs.mkShell {
+        devShells = {
+          default = pkgs.mkShell {
             buildInputs = [ env bundixcli ]
               ++ (with pkgs; [ nodejs yarn rufo httpie ]);
           };
         };
+
+        formatter = pkgs.nixpkgs-fmt;
       });
 }

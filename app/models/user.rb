@@ -9,7 +9,7 @@ class User < ApplicationRecord
             uniqueness: { case_sensitive: false },
             format: {
               with: /\A[\w]+\z/,
-              message: "can only contain letters and numbers"
+              message: "can only contain letters and numbers",
             }
 
   has_many :sessions, dependent: :destroy

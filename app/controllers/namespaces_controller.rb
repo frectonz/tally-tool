@@ -59,18 +59,19 @@ class NamespacesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_namespace
-      @namespace = @current_user.namespaces.find_by(id: params[:id]) || 
-                   @current_user.namespaces.find_by(name: params[:id])
 
-      if !@namespace
-        render json: { error: 'Namespace not found' }, status: :not_found
-      end
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_namespace
+    @namespace = @current_user.namespaces.find_by(id: params[:id]) ||
+                 @current_user.namespaces.find_by(name: params[:id])
 
-    # Only allow a list of trusted parameters through.
-    def namespace_params
-      params.require(:namespace).permit(:name)
+    if !@namespace
+      render json: { error: "Namespace not found" }, status: :not_found
     end
+  end
+
+  # Only allow a list of trusted parameters through.
+  def namespace_params
+    params.require(:namespace).permit(:name)
+  end
 end

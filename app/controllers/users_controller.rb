@@ -47,7 +47,7 @@ class UsersController < ApplicationController
 
         cookies.signed[:session_id] = {
           :value => @session.id,
-          :expires => 1.year.from_now
+          :expires => 1.year.from_now,
         }
       end
     end
@@ -56,7 +56,8 @@ class UsersController < ApplicationController
   end
 
   private
-    def user_params
-      params.require(:user).permit(:username, :email)
-    end
+
+  def user_params
+    params.require(:user).permit(:username, :email)
+  end
 end

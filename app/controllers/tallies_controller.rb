@@ -6,13 +6,13 @@ class TalliesController < ApplicationController
   def index
     render json: @namespace.tallies, status: :ok
   end
-  
+
   # GET /namespaces/:id/tallies/:id
   def show
     tally = @namespace.tallies.find_by(name: params[:id])
 
     if !tally
-      render json: { error: 'Tally not found' }, status: :not_found
+      render json: { error: "Tally not found" }, status: :not_found
     end
 
     render json: @tally, status: :ok
@@ -23,9 +23,9 @@ class TalliesController < ApplicationController
     tally = @namespace.tallies.new name: params[:name]
 
     if tally.save
-     render json: tally, status: :created
+      render json: tally, status: :created
     else
-     render json: tally.errors, status: :unprocessable_entity
+      render json: tally.errors, status: :unprocessable_entity
     end
   end
 
@@ -35,13 +35,13 @@ class TalliesController < ApplicationController
     operation = params[:op]
 
     case operation
-    when 'INC'
+    when "INC"
       tally.count += 1
-    when 'DEC'
+    when "DEC"
       tally.count -= 1
     else
       render json: {
-        error: 'The `op` query parameter must be one of the following values: INC, DEC.' 
+        error: "The `op` query parameter must be one of the following values: INC, DEC.",
       }, status: :bad_request and return
     end
 
@@ -52,12 +52,12 @@ class TalliesController < ApplicationController
     end
   end
 
-
   private
-    def set_namespace
-      @namespace = Namespace.find_by(id: params[:namespace_id]) || Namespace.find_by(name: params[:namespace_id])
-      if !@namespace
-        render json: { error: 'Namespace not found' }, status: :not_found
-      end
-    end  
+
+  def set_namespace
+    @namespace = Namespace.find_by(id: params[:namespace_id]) || Namespace.find_by(name: params[:namespace_id])
+    if !@namespace
+      render json: { error: "Namespace not found" }, status: :not_found
+    end
+  end
 end

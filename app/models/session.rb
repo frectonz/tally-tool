@@ -4,7 +4,7 @@ class Session < ApplicationRecord
     :expires_at,
     :token,
     :user_id,
-    presence: true
+    presence: true,
   )
 
   before_validation :set_defaults
@@ -26,6 +26,7 @@ class Session < ApplicationRecord
   end
 
   CHARS = [*"A".."Z", *"0".."9"].freeze
+
   def set_defaults
     self.expires_at = 1.year.from_now
     self.timeout_at = 10.minutes.from_now
