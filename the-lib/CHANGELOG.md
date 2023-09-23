@@ -1,5 +1,11 @@
 # tally-tool
 
+## 0.1.0
+
+### Minor Changes
+
+- 57bc4bc: Rename `Counter` to `Tally`
+
 ## 0.0.3
 
 ### Patch Changes
