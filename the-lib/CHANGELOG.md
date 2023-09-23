@@ -1,5 +1,11 @@
 # tally-tool
 
+## 0.0.3
+
+### Patch Changes
+
+- 3fa6867: add a `get` method for `Counter`
+
 ## 0.0.2
 
 ### Patch Changes
