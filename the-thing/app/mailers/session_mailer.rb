@@ -5,7 +5,7 @@ class SessionMailer < ApplicationMailer
     @session = params[:session]
     @user = @session.user
     email = @user.email
-    @url = "https://example.com/verify/#{@session.token}"
+    @url = "http://localhost:3000/verify/#{@session.token}"
     mail(to: email, subject: "Login to Tally Tool")
   end
 end

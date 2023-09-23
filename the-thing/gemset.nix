@@ -785,6 +785,19 @@
     targets = [ ];
     version = "2.2.8";
   };
+  rack-cors = {
+    dependencies = [ "rack" ];
+    groups = [ "default" ];
+    platforms = [ ];
+    source = {
+      remotes = [ "https://rubygems.org" ];
+      sha256 = "02lvkg1nb4z3zc2nry545dap7a64bb9h2k8waxfz0jkabkgnpimw";
+      target = "ruby";
+      type = "gem";
+    };
+    targets = [ ];
+    version = "2.0.1";
+  };
   rack-test = {
     dependencies = [ "rack" ];
     groups = [ "default" "development" "test" ];
