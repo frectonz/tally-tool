@@ -44,6 +44,13 @@ export class Counter {
     private count: string,
   ) {}
 
+  async get() {
+    const url = `${this.apiDomain}/namespaces/${this.namespace}/tallies/${this.count}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    return makeCount(data);
+  }
+
   async increment() {
     const url = `${this.apiDomain}/namespaces/${this.namespace}/tallies/${this.count}?op=INC`;
     const res = await fetch(url, { method: "put" });
