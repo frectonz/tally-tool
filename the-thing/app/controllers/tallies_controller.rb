@@ -9,12 +9,12 @@ class TalliesController < ApplicationController
 
   # GET /namespaces/:id/tallies/:id
   def show
-    tally = @namespace.tallies.find_by(name: params[:id])
+    tally = @namespace.tallies.find_by(name: params[:id]) || @namespace.tallies.new(name: params[:id])
 
-    if !tally
-      render json: { error: "Tally not found" }, status: :not_found
-    else
+    if tally.save()
       render json: tally, status: :ok
+    else
+      render json: tally.errors, status: :unprocessable_entity
     end
   end
 
