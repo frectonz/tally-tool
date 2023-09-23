@@ -13,9 +13,9 @@ class TalliesController < ApplicationController
 
     if !tally
       render json: { error: "Tally not found" }, status: :not_found
+    else
+      render json: tally, status: :ok
     end
-
-    render json: @tally, status: :ok
   end
 
   # POST /namespaces/:id/tallies
