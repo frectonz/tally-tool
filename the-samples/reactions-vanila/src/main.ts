@@ -10,24 +10,24 @@ const countDivs = document.querySelectorAll(
 
 countDivs.forEach((countDiv) => {
   const count = countDiv.dataset.name!;
-  const thisCount = reactions.count(count);
+  const tally = reactions.tally(count);
 
   const countH2 = countDiv.querySelector("h2")!;
   const incrementBtn = countDiv.querySelector("button:nth-child(1)")!;
   const decrementBtn = countDiv.querySelector("button:nth-child(2)")!;
 
-  thisCount.get().then((c) => {
+  tally.get().then((c) => {
     countH2.textContent = c.count.toString();
   });
 
   incrementBtn.addEventListener("click", () => {
-    thisCount.increment().then((c) => {
+    tally.increment().then((c) => {
       countH2.textContent = c.count.toString();
     });
   });
 
   decrementBtn.addEventListener("click", () => {
-    thisCount.decrement().then((c) => {
+    tally.decrement().then((c) => {
       countH2.textContent = c.count.toString();
     });
   });
