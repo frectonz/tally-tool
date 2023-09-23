@@ -32,12 +32,12 @@ export class Namespace {
     private namespace: string,
   ) {}
 
-  count(count: string) {
-    return new Counter(this.apiDomain, this.namespace, count);
+  tally(count: string) {
+    return new Tally(this.apiDomain, this.namespace, count);
   }
 }
 
-export class Counter {
+export class Tally {
   constructor(
     private apiDomain: string,
     private namespace: string,
