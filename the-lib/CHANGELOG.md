@@ -1,5 +1,11 @@
 # tally-tool
 
+## 0.2.0
+
+### Minor Changes
+
+- 9495a69: add `completed` field to signify if a user's quota has been completed
+
 ## 0.1.1
 
 ### Patch Changes
