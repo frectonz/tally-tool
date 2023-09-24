@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { Count } from "tally-tool";
   import { TallyTool } from "tally-tool";
 
   export let name: string;
@@ -8,26 +9,28 @@
     .namespace("reactions")
     .tally(name);
 
-  const getCount = () => tally.get().then(c => c.count);
-  const incCount = () => tally.increment().then(c => c.count);
-  const decCount = () => tally.decrement().then(c => c.count);
+  let count = "";
+  let completed = false;
 
-  let countPromise = getCount();
+  const update = (c: Count) => {
+    count = c.tally.count.toString();
+    completed = c.completed;
+  };
+
+  const getCount = () => tally.get().then(update);
+  const incCount = () => tally.increment().then(update);
+  const decCount = () => tally.decrement().then(update);
+
+  getCount();
 </script>
 
   <div class="card">
     <img src={image} alt={name} />
 
-    <h2>
-      {#await countPromise}
-        _
-      {:then count}
-        {count}
-      {/await}
-    </h2>
+    <h2>{count}</h2>
 
     <div class="btns">
-      <button on:click={() => { countPromise = incCount(); }}> + </button>
-      <button on:click={() => { countPromise = decCount(); }}> - </button>
+      <button disabled={completed} on:click={incCount}> + </button>
+      <button disabled={completed} on:click={decCount}> - </button>
     </div>
   </div>
