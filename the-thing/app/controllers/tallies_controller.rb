@@ -69,7 +69,7 @@ class TalliesController < ApplicationController
         }
       end
 
-      completed = user_actions >= @namespace.action_quota
+      completed = (user_actions + 1) >= @namespace.action_quota
       response_object = { tally: tally, completed: completed }
 
       render json: response_object, status: :ok
