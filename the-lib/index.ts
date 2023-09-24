@@ -46,21 +46,21 @@ export class Tally {
 
   async get() {
     const url = `${this.apiDomain}/namespaces/${this.namespace}/tallies/${this.count}`;
-    const res = await fetch(url);
+    const res = await fetch(url, { credentials: "include" });
     const data = await res.json();
     return makeCount(data);
   }
 
   async increment() {
     const url = `${this.apiDomain}/namespaces/${this.namespace}/tallies/${this.count}?op=INC`;
-    const res = await fetch(url, { method: "put" });
+    const res = await fetch(url, { method: "put", credentials: "include" });
     const data = await res.json();
     return makeCount(data);
   }
 
   async decrement() {
     const url = `${this.apiDomain}/namespaces/${this.namespace}/tallies/${this.count}?op=DEC`;
-    const res = await fetch(url, { method: "put" });
+    const res = await fetch(url, { method: "put", credentials: "include" });
     const data = await res.json();
     return makeCount(data);
   }
