@@ -19,6 +19,6 @@
     "vite": "^4.4.5"
   },
   "dependencies": {
-    "tally-tool": "^0.1.0"
+    "tally-tool": "^0.1.1"
   }
 }

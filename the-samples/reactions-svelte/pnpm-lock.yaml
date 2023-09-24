@@ -2,8 +2,8 @@ lockfileVersion: '6.0'
 
 dependencies:
   tally-tool:
-    specifier: ^0.1.0
-    version: 0.1.0
+    specifier: ^0.1.1
+    version: 0.1.1
 
 devDependencies:
   '@sveltejs/vite-plugin-svelte':
@@ -912,8 +912,8 @@ packages:
       periscopic: 3.1.0
     dev: true
 
-  /tally-tool@0.1.0:
-    resolution: {integrity: sha512-u3G8sFDHI24M9rlI8zvIgQ3r87zYStw8sUPHBQsxv0IGMwno4J8AEqLHQB9pTUFZAfr9mIk3KWvZBpkgmZCBJQ==}
+  /tally-tool@0.1.1:
+    resolution: {integrity: sha512-qp4XD5BfH2Te5P52QfSJeYB8KnTF5sJK4i0Q3YHZWoJgd2exnU2A4RHO7mP8YmmH5DXI+xvXy+0lEL3izsAJgw==}
     dev: false
 
   /to-regex-range@5.0.1:

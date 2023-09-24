@@ -11,8 +11,8 @@ dependencies:
     specifier: ^3.39.3
     version: 3.39.3(react-dom@18.2.0)(react@18.2.0)
   tally-tool:
-    specifier: ^0.1.0
-    version: 0.1.0
+    specifier: ^0.1.1
+    version: 0.1.1
 
 devDependencies:
   '@types/react':
@@ -1715,8 +1715,8 @@ packages:
       has-flag: 4.0.0
     dev: true
 
-  /tally-tool@0.1.0:
-    resolution: {integrity: sha512-u3G8sFDHI24M9rlI8zvIgQ3r87zYStw8sUPHBQsxv0IGMwno4J8AEqLHQB9pTUFZAfr9mIk3KWvZBpkgmZCBJQ==}
+  /tally-tool@0.1.1:
+    resolution: {integrity: sha512-qp4XD5BfH2Te5P52QfSJeYB8KnTF5sJK4i0Q3YHZWoJgd2exnU2A4RHO7mP8YmmH5DXI+xvXy+0lEL3izsAJgw==}
     dev: false
 
   /text-table@0.2.0:
