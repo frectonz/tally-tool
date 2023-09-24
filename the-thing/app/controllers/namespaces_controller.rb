@@ -72,6 +72,6 @@ class NamespacesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def namespace_params
-    params.require(:namespace).permit(:name)
+    params.require(:namespace).permit(:name, :action_quota)
   end
 end

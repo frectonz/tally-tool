@@ -9,10 +9,20 @@ class TalliesController < ApplicationController
 
   # GET /namespaces/:id/tallies/:id
   def show
-    tally = @namespace.tallies.find_by(name: params[:id]) || @namespace.tallies.new(name: params[:id])
+    tally_name = params[:id]
+
+    actions_cookie = "#{@namespace.name}_#{tally_name}-actions"
+    user_actions = (cookies[actions_cookie] || "0").to_i
+
+    tally = @namespace.tallies.find_by(name: tally_name) || @namespace.tallies.new(name: tally_name)
+
+    puts "cookie: #{actions_cookie}"
+    puts "user: #{user_actions}"
+    completed = user_actions >= @namespace.action_quota
 
     if tally.save()
-      render json: tally, status: :ok
+      response_object = { tally: tally, completed: completed }
+      render json: response_object, status: :ok
     else
       render json: tally.errors, status: :unprocessable_entity
     end
@@ -31,7 +41,16 @@ class TalliesController < ApplicationController
 
   # PATCH/PUT /namespaces/:id/tallies/:id?op=(INC|DEC)
   def update
-    tally = @namespace.tallies.find_by(name: params[:id]) || @namespace.tallies.new(name: params[:id])
+    tally_name = params[:id]
+
+    actions_cookie = "#{@namespace.name}_#{tally_name}-actions"
+    user_actions = (cookies[actions_cookie] || "0").to_i
+
+    if @namespace.action_quota != 0 and user_actions >= @namespace.action_quota
+      render json: { error: "Reached action quota" } and return
+    end
+
+    tally = @namespace.tallies.find_by(name: tally_name) || @namespace.tallies.new(name: tally_name)
     operation = params[:op]
 
     case operation
@@ -46,6 +65,13 @@ class TalliesController < ApplicationController
     end
 
     if tally.save()
+      unless @namespace.action_quota == 0
+        cookies[actions_cookie] = {
+          :value => user_actions + 1,
+          :expires => 1.year.from_now,
+        }
+      end
+
       render json: tally, status: :ok
     else
       render json: tally.errors, status: :unprocessable_entity
