@@ -1,5 +1,11 @@
 # tally-tool
 
+## 0.1.1
+
+### Patch Changes
+
+- a44af5e: include credentials on requests
+
 ## 0.1.0
 
 ### Minor Changes
