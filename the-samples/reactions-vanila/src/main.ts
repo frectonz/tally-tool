@@ -1,5 +1,5 @@
 import "./style.css";
-import { TallyTool } from "tally-tool";
+import { TallyTool, Count } from "tally-tool";
 
 const tally = new TallyTool("http://localhost:3000");
 const reactions = tally.namespace("reactions");
@@ -13,22 +13,26 @@ countDivs.forEach((countDiv) => {
   const tally = reactions.tally(count);
 
   const countH2 = countDiv.querySelector("h2")!;
-  const incrementBtn = countDiv.querySelector("button:nth-child(1)")!;
-  const decrementBtn = countDiv.querySelector("button:nth-child(2)")!;
+  const incrementBtn = countDiv.querySelector(
+    "button:nth-child(1)",
+  )! as HTMLButtonElement;
+  const decrementBtn = countDiv.querySelector(
+    "button:nth-child(2)",
+  )! as HTMLButtonElement;
 
-  tally.get().then((c) => {
-    countH2.textContent = c.count.toString();
-  });
+  const update = (c: Count) => {
+    countH2.textContent = c.tally.count.toString();
+    incrementBtn.disabled = c.completed;
+    decrementBtn.disabled = c.completed;
+  };
+
+  tally.get().then(update);
 
   incrementBtn.addEventListener("click", () => {
-    tally.increment().then((c) => {
-      countH2.textContent = c.count.toString();
-    });
+    tally.increment().then(update);
   });
 
   decrementBtn.addEventListener("click", () => {
-    tally.decrement().then((c) => {
-      countH2.textContent = c.count.toString();
-    });
+    tally.decrement().then(update);
   });
 });
