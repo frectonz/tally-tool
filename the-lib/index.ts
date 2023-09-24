@@ -7,22 +7,25 @@ export class TallyTool {
 }
 
 export type Count = {
-  id: number;
-  namespace_id: number;
-  name: string;
-  count: number;
-  created_at: Date;
-  updated_at: Date;
+  tally: {
+    id: number;
+    namespace_id: number;
+    name: string;
+    count: number;
+    created_at: Date;
+    updated_at: Date;
+  };
+  completed: boolean;
 };
 
 function makeCount(data: any): Count {
   return {
-    id: data.id,
-    namespace_id: data.namespace_id,
-    name: data.name,
-    count: data.count,
-    created_at: new Date(data.created_at),
-    updated_at: new Date(data.updated_at),
+    ...data,
+    tally: {
+      ...data.tally,
+      created_at: new Date(data.tally.created_at),
+      updated_at: new Date(data.tally.updated_at),
+    },
   };
 }
 
