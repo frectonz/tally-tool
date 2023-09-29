@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,44 +12,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_24_074158) do
-  create_table "namespaces", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "user_id"
-    t.integer "action_quota", default: 0
-    t.index ["user_id"], name: "index_namespaces_on_user_id"
+ActiveRecord::Schema[7.0].define(version: 20_230_924_074_158) do
+  create_table 'namespaces', force: :cascade do |t|
+    t.string 'name'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.integer 'user_id'
+    t.integer 'action_quota', default: 0
+    t.index ['user_id'], name: 'index_namespaces_on_user_id'
   end
 
-  create_table "sessions", force: :cascade do |t|
-    t.string "token", null: false
-    t.datetime "timeout_at", null: false
-    t.datetime "expires_at", null: false
-    t.datetime "claimed_at"
-    t.integer "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_sessions_on_user_id"
+  create_table 'sessions', force: :cascade do |t|
+    t.string 'token', null: false
+    t.datetime 'timeout_at', null: false
+    t.datetime 'expires_at', null: false
+    t.datetime 'claimed_at'
+    t.integer 'user_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['user_id'], name: 'index_sessions_on_user_id'
   end
 
-  create_table "tallies", force: :cascade do |t|
-    t.integer "namespace_id", null: false
-    t.integer "count", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "name"
-    t.index ["namespace_id"], name: "index_tallies_on_namespace_id"
+  create_table 'tallies', force: :cascade do |t|
+    t.integer 'namespace_id', null: false
+    t.integer 'count', default: 0
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.string 'name'
+    t.index ['namespace_id'], name: 'index_tallies_on_namespace_id'
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "username"
+  create_table 'users', force: :cascade do |t|
+    t.string 'email'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.string 'username'
   end
 
-  add_foreign_key "namespaces", "users"
-  add_foreign_key "sessions", "users"
-  add_foreign_key "tallies", "namespaces"
+  add_foreign_key 'namespaces', 'users'
+  add_foreign_key 'sessions', 'users'
+  add_foreign_key 'tallies', 'namespaces'
 end

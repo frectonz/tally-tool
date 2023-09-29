@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SessionMailer < ApplicationMailer
   default from: "auth@example.com"
 

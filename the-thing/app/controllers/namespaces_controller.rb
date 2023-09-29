@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class NamespacesController < ApplicationController
   before_action :get_current_user
-  before_action :set_namespace, only: %i[ show edit update destroy ]
+  before_action :set_namespace, only: %i[show edit update destroy]
 
   # GET /namespaces or /namespaces.json
   def index
@@ -8,8 +10,7 @@ class NamespacesController < ApplicationController
   end
 
   # GET /namespaces/1 or /namespaces/1.json
-  def show
-  end
+  def show; end
 
   # GET /namespaces/new
   def new
@@ -17,8 +18,7 @@ class NamespacesController < ApplicationController
   end
 
   # GET /namespaces/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /namespaces or /namespaces.json
   def create
@@ -59,19 +59,18 @@ class NamespacesController < ApplicationController
   end
 
   private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_namespace
+      @namespace = @current_user.namespaces.find_by(id: params[:id]) ||
+                   @current_user.namespaces.find_by(name: params[:id])
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_namespace
-    @namespace = @current_user.namespaces.find_by(id: params[:id]) ||
-                 @current_user.namespaces.find_by(name: params[:id])
+      return if @namespace
 
-    if !@namespace
       render json: { error: "Namespace not found" }, status: :not_found
     end
-  end
 
-  # Only allow a list of trusted parameters through.
-  def namespace_params
-    params.require(:namespace).permit(:name, :action_quota)
-  end
+    # Only allow a list of trusted parameters through.
+    def namespace_params
+      params.require(:namespace).permit(:name, :action_quota)
+    end
 end

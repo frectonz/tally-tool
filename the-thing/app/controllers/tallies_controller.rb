@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class TalliesController < ApplicationController
   before_action :set_namespace
-  skip_before_action :verify_authenticity_token, only: [:create, :update]
+  skip_before_action :verify_authenticity_token, only: %i[create update]
 
   # GET /namespaces/:id/tallies/
   def index
@@ -17,8 +19,8 @@ class TalliesController < ApplicationController
     tally = @namespace.tallies.find_by(name: tally_name) || @namespace.tallies.new(name: tally_name)
     completed = user_actions >= @namespace.action_quota
 
-    if tally.save()
-      response_object = { tally: tally, completed: completed }
+    if tally.save
+      response_object = { tally:, completed: }
       render json: response_object, status: :ok
     else
       render json: tally.errors, status: :unprocessable_entity
@@ -43,7 +45,7 @@ class TalliesController < ApplicationController
     actions_cookie = "#{@namespace.name}_#{tally_name}-actions"
     user_actions = (cookies[actions_cookie] || "0").to_i
 
-    if @namespace.action_quota != 0 and user_actions >= @namespace.action_quota
+    if (@namespace.action_quota != 0) && (user_actions >= @namespace.action_quota)
       render json: { error: "Reached action quota" } and return
     end
 
@@ -57,20 +59,20 @@ class TalliesController < ApplicationController
       tally.count -= 1
     else
       render json: {
-        error: "The `op` query parameter must be one of the following values: INC, DEC.",
+        error: "The `op` query parameter must be one of the following values: INC, DEC."
       }, status: :bad_request and return
     end
 
-    if tally.save()
-      unless @namespace.action_quota == 0
+    if tally.save
+      unless @namespace.action_quota.zero?
         cookies[actions_cookie] = {
-          :value => user_actions + 1,
-          :expires => 1.year.from_now,
+          value: user_actions + 1,
+          expires: 1.year.from_now
         }
       end
 
       completed = (user_actions + 1) >= @namespace.action_quota
-      response_object = { tally: tally, completed: completed }
+      response_object = { tally:, completed: }
 
       render json: response_object, status: :ok
     else
@@ -79,11 +81,10 @@ class TalliesController < ApplicationController
   end
 
   private
+    def set_namespace
+      @namespace = Namespace.find_by(id: params[:namespace_id]) || Namespace.find_by(name: params[:namespace_id])
+      return if @namespace
 
-  def set_namespace
-    @namespace = Namespace.find_by(id: params[:namespace_id]) || Namespace.find_by(name: params[:namespace_id])
-    if !@namespace
       render json: { error: "Namespace not found" }, status: :not_found
     end
-  end
 end

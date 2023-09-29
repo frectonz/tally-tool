@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 class Session < ApplicationRecord
   validates(
     :timeout_at,
     :expires_at,
     :token,
     :user_id,
-    presence: true,
+    presence: true
   )
 
   before_validation :set_defaults
 
   scope(
     :available,
-    lambda { where("expires_at > ? AND claimed_at IS NULL", Time.current) }
+    -> { where("expires_at > ? AND claimed_at IS NULL", Time.current) }
   )
 
   belongs_to :user
@@ -22,7 +24,7 @@ class Session < ApplicationRecord
 
   def claim
     self.claimed_at = Time.current
-    self.save
+    save
   end
 
   CHARS = [*"A".."Z", *"0".."9"].freeze

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   def register_get
     @user = User.new
@@ -9,7 +11,7 @@ class UsersController < ApplicationController
 
     if @user.save
       session = @user.sessions.create
-      SessionMailer.with(session: session).login_email.deliver_later
+      SessionMailer.with(session:).login_email.deliver_later
       render(:email)
     else
       render(:register)
@@ -25,7 +27,7 @@ class UsersController < ApplicationController
 
     if @user
       session = @user.sessions.create
-      SessionMailer.with(session: session).login_email.deliver_later
+      SessionMailer.with(session:).login_email.deliver_later
       render(:email)
     else
       @error = "user was not found"
@@ -36,9 +38,7 @@ class UsersController < ApplicationController
   def verify
     @session = Session.available.find_by(token: params[:token])
 
-    unless @session
-      @message = "Token doesn't exist"
-    else
+    if @session
       if @session.timed_out?
         @message = "Token timed out"
       else
@@ -46,18 +46,19 @@ class UsersController < ApplicationController
         @session.claim
 
         cookies.signed[:session_id] = {
-          :value => @session.id,
-          :expires => 1.year.from_now,
+          value: @session.id,
+          expires: 1.year.from_now
         }
       end
+    else
+      @message = "Token doesn't exist"
     end
 
     render :verify
   end
 
   private
-
-  def user_params
-    params.require(:user).permit(:username, :email)
-  end
+    def user_params
+      params.require(:user).permit(:username, :email)
+    end
 end

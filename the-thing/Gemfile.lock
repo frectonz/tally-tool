@@ -209,6 +209,28 @@ GEM
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.29.0)
       parser (>= 3.2.1.0)
+    rubocop-md (1.2.0)
+      rubocop (>= 1.0)
+    rubocop-minitest (0.32.2)
+      rubocop (>= 1.39, < 2.0)
+    rubocop-packaging (0.5.2)
+      rubocop (>= 1.33, < 2.0)
+    rubocop-performance (1.19.1)
+      rubocop (>= 1.7.0, < 2.0)
+      rubocop-ast (>= 0.4.0)
+    rubocop-rails (2.21.1)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 1.33.0, < 2.0)
+    rubocop-rails_config (1.14.3)
+      railties (>= 5.0)
+      rubocop (>= 1.48.0)
+      rubocop-ast (>= 1.26.0)
+      rubocop-md
+      rubocop-minitest (~> 0.22)
+      rubocop-packaging (~> 0.5)
+      rubocop-performance (~> 1.11)
+      rubocop-rails (~> 2.0)
     ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
     selenium-webdriver (4.12.0)
@@ -278,6 +300,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-cors (~> 2.0)
   rails (~> 7.0.8)
+  rubocop-rails_config
   selenium-webdriver
   solargraph
   sprockets-rails
