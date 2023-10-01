@@ -1,16 +1,41 @@
-<h1>welcome back to tally tool</h1>
+<main class="auth">
+  <a href="/">
+    <%= image_tag "tally-tool.svg", class: "auth__logo" %>
+  </a>
+  <h1 class="auth__title">welcome back to <span>tally tool!</span></h1>  
 
-<%= form_with url: "/login" do |form| %>
-  <div>
-    <%= form.label :email, "email" %>
-    <%= form.email_field :email %>
+  <%= form_with url: "/login" do |form| %>
+    <div class="container">
+      <%= form.label :email, "email" %>
+      <%= form.email_field :email %>
 
-    <% if @error %>
-      <p class="error-text"><%= @error %></p>
-    <% end %>
-  </div>
+      <% if @error %>
+        <div class="errors">
+          <p class="error-text"><%= @error %></p>
+        </div>
+      <% end %>
+    </div>
 
-  <div>
-    <%= form.submit "login" %>
-  </div>
-<% end %>
+    <div class="container">
+      <%= form.submit "login" %>
+    </div>
+  <% end %>
+</main>
+
+<style>
+  .auth {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    padding: 1rem;
+  }
+
+  .auth__logo {
+    width: 10rem;
+  }
+
+  .auth__title span {
+    color: var(--black);
+  }
+</style>
