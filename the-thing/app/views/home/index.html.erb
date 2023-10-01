@@ -1,4 +1,104 @@
-<h1>Home</h1>
+<header class="header">
+  <div class="header__main brutal">
+    <a href="/" class="header__logo brutal">
+      <%= image_tag "tally-tool.svg", class: "header__logo__img" %>
+      <span class="header__logo__text">TALLY TOOL</span>
+    </a>
 
-<a href="/register">register</a>
-<a href="/login">login</a>
+    <nav class="header__nav">
+      <a href="" class="btn btn-secondary">Login</a>
+      <a href="" class="btn btn-primary">Register</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    padding: 1rem;
+  }
+
+  .header__main {
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: var(--black);
+    background-color: var(--white);
+  }
+
+  .header__logo {
+    display: flex;
+    align-items: center;
+    background-color: var(--orange);
+    padding: 1rem;
+    border-radius: 10px;
+    color: var(--white);
+    font-weight: bold;
+  }
+
+  .header__logo__img {
+    width: 4rem;
+  }
+
+  .header__logo__text {
+    font-size: 2rem;
+  }
+
+  .header__nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+</style>
+
+<section class="hero">
+  <div>
+    <h1>When you just wanna <span class="highlight-text">count stuff!</span></h1>
+
+    <pre class="hero__code">
+      <code class="language-javascript brutal">import { TallyTool } from "tally-tool";
+
+const tallyTool = new TallyTool("https://tally-tool.frectonz.io");
+const reactions = tallyTool.namespace("reactions");
+
+async function onFireClick() {
+  await reactions.tally("fire").increment();
+}</code>
+    </pre>
+  </div>
+  <div class="hero__right">
+    <%= image_tag "fingers.svg", class: "hero__img" %>
+  </div>
+</section>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/javascript.min.js"></script>
+
+<script defer>hljs.highlightAll();</script>
+
+<style>
+  .hero {
+    margin: 0 auto;
+    width: 90vw;
+    padding: 7rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .hero__right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero__img {
+    width: 40rem;
+  }
+
+  .hero__code {
+    width: fit-content;
+    font-size: 1.2rem;
+  }
+</style>
