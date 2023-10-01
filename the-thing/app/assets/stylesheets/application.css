@@ -154,14 +154,10 @@ a {
 
 .btn {
   color: var(--black);
-
   padding: 0.5rem 1rem;
-
   border: 3px solid var(--black);
   box-shadow: 3px 4px var(--black);
   border-radius: 10px;
-
-  cursor: pointer;
 }
 
 .btn-primary {
@@ -175,4 +171,52 @@ a {
 .highlight-text {
   color: var(--black);
   font-size: 7rem;
+}
+
+form {
+  min-width: 400px;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+form > .container {
+  gap: .3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 3px solid var(--black);
+  box-shadow: 3px 4px var(--black);
+  border-radius: 10px;
+
+  transition: 100ms;
+}
+
+input:focus {
+  box-shadow: none;
+}
+
+input[type="submit"] {
+  background-color: var(--orange);
+}
+
+input[type="submit"]:hover {
+  transform: scaleY(1.1);
+}
+
+.errors {
+  color: var(--white);
+  background-color: red;
+
+  font-weight: bolder;
+
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 3px solid var(--black);
+  box-shadow: 3px 4px var(--black);
+  border-radius: 10px;
 }

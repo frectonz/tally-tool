@@ -1,23 +1,27 @@
 <%= form_with model: user, url: "/register" do |form| %>
-  <div>
+  <div class="container">
     <%= form.label :username, "username" %>
     <%= form.text_field :username %>
 
     <% if user.errors[:username].present? %>
-      <% user.errors[:username].each do |error| %>
-        <p class="error-text"><%= error %></p>
-      <% end %>
+      <div class="errors">
+        <% user.errors[:username].each do |error| %>
+          <p><%= error %></p>
+        <% end %>
+      </div>
     <% end %>
   </div>
 
-  <div>
+  <div class="container">
     <%= form.label :email, "email" %>
     <%= form.email_field :email %>
 
     <% if user.errors[:email].present? %>
-      <% user.errors[:email].each do |error| %>
-        <p class="error-text"><%= error %></p>
-      <% end %>
+      <div class="errors">
+        <% user.errors[:email].each do |error| %>
+          <p><%= error %></p>
+        <% end %>
+      </div>
     <% end %>
   </div>
 
