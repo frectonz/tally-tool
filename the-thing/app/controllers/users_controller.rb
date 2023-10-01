@@ -40,9 +40,11 @@ class UsersController < ApplicationController
 
     if @session
       if @session.timed_out?
-        @message = "Token timed out"
+        @status = :timed_out
+        @message = "token timed out"
       else
-        @message = "Valid token"
+        @status = :valid
+        @message = "verified successfully"
         @session.claim
 
         cookies.signed[:session_id] = {
@@ -51,7 +53,8 @@ class UsersController < ApplicationController
         }
       end
     else
-      @message = "Token doesn't exist"
+      @status = :no_token
+      @message = "token doesn't exist"
     end
 
     render :verify

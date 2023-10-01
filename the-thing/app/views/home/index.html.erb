@@ -6,8 +6,12 @@
     </a>
 
     <nav class="header__nav">
-      <a href="/login" class="btn btn-secondary">Login</a>
-      <a href="/register" class="btn btn-primary">Register</a>
+      <% if @current_user %>
+        <a href="/namespaces" class="btn btn-primary">dashboard</a>
+      <% else %>
+        <a href="/login" class="btn btn-secondary">login</a>
+        <a href="/register" class="btn btn-primary">register</a>
+      <% end %>
     </nav>
   </div>
 </header>
