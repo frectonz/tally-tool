@@ -1,7 +1,7 @@
-<a href="<%= namespace_path namespace %>" class="namespace" id="<%= dom_id namespace %>">
-  <h1>
+<a href="<%= namespace_path namespace %>" class="namespace brutal" id="<%= dom_id namespace %>">
+  <h3 class="namespace__title">
     <%= namespace.name %>
-  </h1>
+  </h3>
 
   <p>
     <%= pluralize namespace.tallies.count, "tally" %>

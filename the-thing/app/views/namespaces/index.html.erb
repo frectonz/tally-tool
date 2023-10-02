@@ -1,10 +1,102 @@
 <p class="notice"><%= notice %></p>
 
-<h1 class="title">Namespaces</h1>
+<header class="header">
+  <div class="header__main brutal">
+    <a href="/" class="header__logo brutal">
+      <%= image_tag "tally-tool.svg", class: "header__logo__img" %>
+      <span class="header__logo__text">TALLY TOOL</span>
+    </a>
 
-<section class="namespaces-list">
-  <div class="new-namespace">
-    <%= link_to "New Namespace", new_namespace_path %>
+    <nav class="header__nav">
+      <a href="/logout" class="btn btn-primary">log out</a>
+    </nav>
   </div>
-  <%= render @namespaces %>
-</section>
+</header>
+
+<style>
+  .header {
+    padding: 1rem;
+  }
+
+  .header__main {
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: var(--black);
+    background-color: var(--white);
+  }
+
+  .header__logo {
+    display: flex;
+    align-items: center;
+    background-color: var(--orange);
+    padding: 1rem;
+    border-radius: 10px;
+    color: var(--white);
+    font-weight: bold;
+  }
+
+  .header__logo__img {
+    width: 4rem;
+  }
+
+  .header__logo__text {
+    font-size: 2rem;
+  }
+
+  .header__nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+</style>
+
+<main class="page">
+  <h1 class="page__title">
+    <%= "#{@current_user.username}'s namespaces" %>
+  </h1>
+
+  <section class="namespaces">
+    <a href="/namespaces/new" class="namespaces__new brutal">
+      New Namespace
+    </a>
+    <%= render @namespaces %>
+  </section>
+</main>
+
+<style>
+  .page {
+    margin: 0 auto;
+    width: 90vw;
+  }
+
+  .page__title {
+    border-bottom: 5px solid var(--white);
+  }
+
+  .namespaces {
+    padding-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .namespaces > a {
+    padding: 1rem;
+  }
+
+  .namespaces__new {
+    font-size: 2rem;
+    color: var(--black);
+    background-color: var(--white);
+  }
+
+  .namespace {
+    transition: 200ms;
+  }
+
+  .namespace:hover {
+    box-shadow: none;
+  }
+</style>
