@@ -1,23 +1,27 @@
 <%= form_with(model: namespace) do |form| %>
-  <div>
+  <div class="container">
     <%= form.label :name, style: "display: block" %>
     <%= form.text_field :name %>
 
     <% if namespace.errors[:name].present? %>
-      <% namespace.errors[:name].each do |error| %>
-        <p class="error-text"><%= error %></p>
-      <% end %>
+      <div class="errors">
+        <% namespace.errors[:name].each do |error| %>
+          <p><%= error %></p>
+        <% end %>
+      </div>
     <% end %>
   </div>
 
-  <div>
+  <div class="container">
     <%= form.label :action_quota, style: "display: block" %>
     <%= form.text_field :action_quota %>
 
     <% if namespace.errors[:action_quota].present? %>
-      <% namespace.errors[:action_quota].each do |error| %>
-        <p class="error-text"><%= error %></p>
-      <% end %>
+      <div class="errors">
+        <% namespace.errors[:action_quota].each do |error| %>
+          <p><%= error %></p>
+        <% end %>
+      </div>
     <% end %>
   </div>
 
