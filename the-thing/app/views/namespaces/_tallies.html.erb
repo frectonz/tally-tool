@@ -34,8 +34,9 @@
 <% else %>
   <% origin = "#{request.protocol}#{request.host_with_port}" %>
   <% sample = "#{origin}/namespaces/#{namespace.name}/tallies/test" %>
-  <div class="tallies brutal">
-    <h3>This namespace doesn't have a tally create one using one of the following.</h3>
+  <div class="tallies">
+    <h4>this namespace doesn't have a tally.</h4>
+    <h4>create one using one of the following.</h4>
     <div>
       <pre><code class="language-bash brutal">http PUT <%= sample %> op==INC
 # or
@@ -53,6 +54,10 @@ curl -X PUT -d op=INC <%= sample %></code></pre>
 <style>
   .tallies {
     margin-top: 2rem;
-    padding: 1rem;
+    width: fit-content;
+  }
+
+  pre {
+    width: fit-content;
   }
 </style>

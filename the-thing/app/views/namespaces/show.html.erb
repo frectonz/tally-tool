@@ -55,7 +55,7 @@
 </style>
 
 <main class="page">
-  <h1 class="page__title">tallies in <span><%= @namespace.name %></span></h1>
+  <h1 class="page__title">tallies in <span class="highlight"><%= @namespace.name %></span></h1>
   <%= render "namespaces/tallies", namespace: @namespace %>
 </main>
 
@@ -67,5 +67,9 @@
 
   .page__title {
     border-bottom: 5px solid var(--white);
+  }
+
+  .highlight {
+    color: var(--black);
   }
 </style>
