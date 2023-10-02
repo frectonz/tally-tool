@@ -1,12 +1,71 @@
 <p class="notice"><%= notice %></p>
 
-<div class="link">
-  <%= link_to "Back to namespaces", namespaces_path %>
-  <%= link_to "Edit this namespace", edit_namespace_path(@namespace) %>
-</div>
+<header class="header">
+  <div class="header__main brutal">
+    <a href="/" class="header__logo brutal">
+      <%= image_tag "tally-tool.svg", class: "header__logo__img" %>
+      <span class="header__logo__text">TALLY TOOL</span>
+    </a>
 
-<h1>Tallies in namespace <span class="highlight"><%= @namespace.name %></span></h1>
+    <nav class="header__nav">
+      <%= link_to "edit this namespace", edit_namespace_path(@namespace), class: "btn btn-secondary" %>
+      <%= link_to "back to namespaces", namespaces_path, class: "btn btn-primary" %>
+      <%= button_to "delete this namespace", @namespace, method: :delete, class: "btn btn-destroy" %>
+    </nav>
+  </div>
+</header>
 
-<%= render "namespaces/tallies", namespace: @namespace %>
+<style>
+  .header {
+    padding: 1rem;
+  }
 
-<%= button_to "destroy this namespace", @namespace, method: :delete, class: "destroy" %>
+  .header__main {
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: var(--black);
+    background-color: var(--white);
+  }
+
+  .header__logo {
+    display: flex;
+    align-items: center;
+    background-color: var(--orange);
+    padding: 1rem;
+    border-radius: 10px;
+    color: var(--white);
+    font-weight: bold;
+  }
+
+  .header__logo__img {
+    width: 4rem;
+  }
+
+  .header__logo__text {
+    font-size: 2rem;
+  }
+
+  .header__nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+</style>
+
+<main class="page">
+  <h1 class="page__title">tallies in <span><%= @namespace.name %></span></h1>
+  <%= render "namespaces/tallies", namespace: @namespace %>
+</main>
+
+<style>
+  .page {
+    margin: 0 auto;
+    width: 90vw;
+  }
+
+  .page__title {
+    border-bottom: 5px solid var(--white);
+  }
+</style>

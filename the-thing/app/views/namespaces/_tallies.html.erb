@@ -10,14 +10,49 @@
     </thead>
     <%= render namespace.tallies %>
   </table>
+
+  <style>
+    table {
+      text-align: left;
+      color: var(--black);
+      background-color: var(--white);
+      border-collapse: collapse;
+      border: 2px solid var(--black);
+      box-shadow: 5px 6px var(--black);
+    }
+
+    th {
+      color: var(--white);
+      background-color: var(--orange);
+    }
+
+    td, th {
+      padding: 0.5rem 1rem;
+      border: 2px solid var(--black);
+    }
+  </style>
 <% else %>
   <% origin = "#{request.protocol}#{request.host_with_port}" %>
   <% sample = "#{origin}/namespaces/#{namespace.name}/tallies/test" %>
-  <div class="tallies empty">
+  <div class="tallies brutal">
     <h3>This namespace doesn't have a tally create one using one of the following.</h3>
     <div>
-      <pre>http PUT <%= sample %> op==INC</pre>
-      <pre>curl -X PUT -d op=INC <%= sample %></pre>
+      <pre><code class="language-bash brutal">http PUT <%= sample %> op==INC
+# or
+curl -X PUT -d op=INC <%= sample %></code></pre>
     </div>
   </div>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-light.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+
+  <script defer>hljs.highlightAll();</script>
 <% end %>
+
+<style>
+  .tallies {
+    margin-top: 2rem;
+    padding: 1rem;
+  }
+</style>

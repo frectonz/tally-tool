@@ -134,6 +134,7 @@ textarea:not([rows]) {
   --orange: #ff6600;
   --white: #fff;
   --black: #000;
+  --red: red;
 }
 
 body {
@@ -153,7 +154,7 @@ a {
 }
 
 .btn {
-  color: var(--black);
+  color: var(--white);
   padding: 0.5rem 1rem;
   border: 3px solid var(--black);
   box-shadow: 3px 4px var(--black);
@@ -165,7 +166,12 @@ a {
 }
 
 .btn-secondary {
+  color: var(--black);
   background-color: var(--white);
+}
+
+.btn-destroy {
+  background-color: var(--red);
 }
 
 .highlight-text {
