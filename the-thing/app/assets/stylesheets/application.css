@@ -154,7 +154,6 @@ a {
 }
 
 .btn {
-  color: var(--white);
   padding: 0.5rem 1rem;
   border: 3px solid var(--black);
   box-shadow: 3px 4px var(--black);
@@ -162,6 +161,7 @@ a {
 }
 
 .btn-primary {
+  color: var(--black);
   background-color: var(--orange);
 }
 
