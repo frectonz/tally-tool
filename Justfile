@@ -23,3 +23,12 @@ delete-terraform-dynamodb:
 
 setup-terraform: create-terraform-bucket create-terraform-dynamodb
 destroy-terraform: delete-terraform-bucket delete-terraform-dynamodb
+
+apply-infra:
+  cd the-infra; terraform apply
+
+destroy-infra:
+  cd the-infra; terraform destroy
+
+setup: setup-terraform apply-infra
+destroy: destroy-infra destroy-terraform
