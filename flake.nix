@@ -1,12 +1,6 @@
 {
   description = "Tally tool flake";
 
-  nixConfig = {
-    extra-substituters = "https://nixpkgs-ruby.cachix.org";
-    extra-trusted-public-keys =
-      "nixpkgs-ruby.cachix.org-1:vrcdi50fTolOxWCZZkw0jakOnUI1T19oYJ+PRYdK4SM=";
-  };
-
   inputs = {
     nixpkgs.url = "nixpkgs";
     ruby-nix.url = "github:inscapist/ruby-nix";
@@ -50,14 +44,34 @@
             buildInputs = (
               let
                 railsInputs = [ rubyEnv bundixcli ] ++ (with pkgs; [ nodejs yarn rufo ]);
+
                 nodeJsInputs = with pkgs; [
                   nodePackages.pnpm
                   nodePackages.typescript-language-server
                 ];
-                utilityInputs = with pkgs; [ httpie nil just ];
+
+                utilityInputs = with pkgs; [
+                  httpie
+                  nil
+                  just
+                  fzf
+                  terraform
+                  terraform-ls
+                  awscli
+                ];
               in
               railsInputs ++ nodeJsInputs ++ utilityInputs
             );
+
+            shellHook =
+              let
+                aws = import ./aws.nix;
+              in
+              ''
+                export AWS_ACCESS_KEY_ID=${aws.accessKeyId}
+                export AWS_SECRET_ACCESS_KEY=${aws.secretAccessKey}
+                export AWS_SESSION_TOKEN=${aws.sessionToken}
+              '';
           };
         };
 
