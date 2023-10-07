@@ -64,13 +64,11 @@
             );
 
             shellHook =
-              let
-                aws = import ./aws.nix;
-              in
               ''
-                export AWS_ACCESS_KEY_ID=${aws.accessKeyId}
-                export AWS_SECRET_ACCESS_KEY=${aws.secretAccessKey}
-                export AWS_SESSION_TOKEN=${aws.sessionToken}
+                export AWS_ACCESS_KEY_ID=$(pass tally-tool/access-key)
+                export AWS_SECRET_ACCESS_KEY=$(pass tally-tool/access-key-secret)
+                export AWS_DEFAULT_REGION=eu-west-3
+                export AWS_DEFAULT_OUTPUT=table
               '';
           };
         };
