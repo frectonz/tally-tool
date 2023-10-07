@@ -54,7 +54,7 @@
                   nodePackages.pnpm
                   nodePackages.typescript-language-server
                 ];
-                utilityInputs = with pkgs; [ httpie nil ];
+                utilityInputs = with pkgs; [ httpie nil just ];
               in
               railsInputs ++ nodeJsInputs ++ utilityInputs
             );
