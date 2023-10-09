@@ -770,12 +770,12 @@
     platforms = [ ];
     source = {
       remotes = [ "https://rubygems.org" ];
-      sha256 = "0yqv698njhwi5m8wc6smgszjswlv8ib94kkq5ih9apnsrraggzw9";
+      sha256 = "1y8jcw80zcxvdq0id329lzmp5pzx7hpac227d7sgjkblc89s3pfm";
       target = "ruby";
       type = "gem";
     };
     targets = [ ];
-    version = "5.6.7";
+    version = "6.4.0";
   };
   racc = {
     groups = [ "default" "development" "test" ];

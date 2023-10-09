@@ -31,7 +31,7 @@ apply-infra:
   cd the-infra; terraform apply -var="master_key=${RAILS_MASTER_KEY}"
 
 destroy-infra:
-  cd the-infra; terraform destroy
+  cd the-infra; terraform destroy -var="master_key=${RAILS_MASTER_KEY}"
 
 archive-the-thing:
   cd the-thing; git archive -o the-thing.zip HEAD
