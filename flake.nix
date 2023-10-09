@@ -2,16 +2,27 @@
   description = "Tally tool flake";
 
   inputs = {
-    nixpkgs.url = "nixpkgs";
-    ruby-nix.url = "github:inscapist/ruby-nix";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    fu.url = "github:numtide/flake-utils";
+
+    ruby-nix = {
+      url = "github:inscapist/ruby-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # a fork that supports platform dependant gem
     bundix = {
       url = "github:inscapist/bundix/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    fu.url = "github:numtide/flake-utils";
-    bob-ruby.url = "github:bobvanderlinden/nixpkgs-ruby";
-    bob-ruby.inputs.nixpkgs.follows = "nixpkgs";
+
+    bob-ruby = {
+      url = "github:bobvanderlinden/nixpkgs-ruby";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "fu";
+      };
+    };
   };
 
   outputs = { self, nixpkgs, fu, ruby-nix, bundix, bob-ruby }:
@@ -21,11 +32,16 @@
         pkgs = import nixpkgs {
           inherit system;
           overlays = [ bob-ruby.overlays.default ];
+          config.allowUnfree = true;
         };
         rubyNix = ruby-nix.lib pkgs;
         gemset = import ./the-thing/gemset.nix;
+
         # See available versions here: https://github.com/bobvanderlinden/nixpkgs-ruby/blob/master/ruby/versions.json
-        ruby = pkgs."ruby-3.2";
+        ignoringVulns = x: x // { meta = (x.meta // { knownVulnerabilities = []; }); };
+        ruby = pkgs."ruby-3.0.6".override {
+          openssl = pkgs.openssl_1_1.overrideAttrs ignoringVulns;
+        };
         bundixcli = bundix.packages.${system}.default;
 
         # If you want to override gem build config, see
