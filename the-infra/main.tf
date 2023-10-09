@@ -40,6 +40,8 @@ resource "aws_elastic_beanstalk_environment" "tally_tool_app_env" {
   tier                = "WebServer"
   cname_prefix        = "tally-tool"
 
+  version_label = aws_elastic_beanstalk_application_version.beanstalk_app_version.name
+
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "IamInstanceProfile"
@@ -102,4 +104,22 @@ resource "aws_iam_role" "beanstalk_service" {
 resource "aws_iam_role_policy_attachment" "beanstalk_service_policy" {
   role       = aws_iam_role.beanstalk_service.name
   policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier"
+}
+
+resource "aws_s3_bucket" "beanstalk_source" {
+  bucket = "tally-tool-source"
+}
+
+resource "aws_s3_object" "beanstalk_source_object" {
+  bucket = aws_s3_bucket.beanstalk_source.id
+  key    = "BeanstalkSource/TallyTool.zip"
+  source = "../the-thing/the-thing.zip"
+}
+
+resource "aws_elastic_beanstalk_application_version" "beanstalk_app_version" {
+  name        = "TallyToolSourceLabel"
+  application = aws_elastic_beanstalk_application.tally_tool_app.name
+
+  bucket = aws_s3_bucket.beanstalk_source.id
+  key    = aws_s3_object.beanstalk_source_object.id
 }

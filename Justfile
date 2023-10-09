@@ -33,5 +33,8 @@ apply-infra:
 destroy-infra:
   cd the-infra; terraform destroy
 
-setup: setup-terraform init-infra apply-infra
+archive-the-thing:
+  cd the-thing; git archive -o the-thing.zip HEAD
+
+setup: setup-terraform archive-the-thing init-infra apply-infra
 destroy: destroy-infra destroy-terraform
