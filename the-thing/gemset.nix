@@ -584,6 +584,18 @@
     targets = [ ];
     version = "1.1.5";
   };
+  mini_portile2 = {
+    groups = [ "default" "development" "test" ];
+    platforms = [ ];
+    source = {
+      remotes = [ "https://rubygems.org" ];
+      sha256 = "02mj8mpd6ck5gpcnsimx5brzggw5h5mmmpq2djdypfq16wcw82qq";
+      target = "ruby";
+      type = "gem";
+    };
+    targets = [ ];
+    version = "2.8.4";
+  };
   minitest = {
     groups = [ "default" "development" ];
     platforms = [ ];
@@ -673,10 +685,15 @@
     version = "2.5.9";
   };
   nokogiri = {
-    dependencies = [ "racc" ];
+    dependencies = [ "mini_portile2" "racc" ];
     groups = [ "default" "development" "test" ];
     platforms = [ ];
-    source = null;
+    source = {
+      remotes = [ "https://rubygems.org" ];
+      sha256 = "0k9w2z0953mnjrsji74cshqqp08q7m1r6zhadw1w0g34xzjh3a74";
+      target = "ruby";
+      type = "gem";
+    };
     targets = [{
       remotes = [ "https://rubygems.org" ];
       sha256 = "0hhqzm7p4lww7v3i33im26bmiryfqr0p3iknbadyv5ypf8yysb47";
@@ -684,23 +701,7 @@
       targetCPU = "x86_64";
       targetOS = "linux";
       type = "gem";
-    }
-      {
-        remotes = [ "https://rubygems.org" ];
-        sha256 = "1my55dpyz0rphaxv3miz04lv3cg609wf4sj8gyyxwd00aif60mnp";
-        target = "x86_64-darwin";
-        targetCPU = "x86_64";
-        targetOS = "darwin";
-        type = "gem";
-      }
-      {
-        remotes = [ "https://rubygems.org" ];
-        sha256 = "1sckrzwfv3rp4kj176i3d8zq17qd32h7n2zr12h85z7ljgi8hwkh";
-        target = "arm64-darwin";
-        targetCPU = "arm64";
-        targetOS = "darwin";
-        type = "gem";
-      }];
+    }];
     version = "1.15.4";
   };
   parallel = {
@@ -1181,33 +1182,23 @@
     version = "3.4.2";
   };
   sqlite3 = {
+    dependencies = [ "mini_portile2" ];
     groups = [ "default" ];
     platforms = [ ];
-    source = null;
+    source = {
+      remotes = [ "https://rubygems.org" ];
+      sha256 = "15415lmz69jbzl6nch4q5l2jxv054676nk6y0vgy0g3iklmjrxvc";
+      target = "ruby";
+      type = "gem";
+    };
     targets = [{
       remotes = [ "https://rubygems.org" ];
-      sha256 = "0fqykiys578zg9ygp05i382iclk7f3wny4pmmr4cam1jqj6sa7k5";
-      target = "x86_64-darwin";
+      sha256 = "0fxq22qjl1q0i7b2b6rspaibba6hrjj01zsambnq0wd32nakxxdl";
+      target = "x86_64-linux";
       targetCPU = "x86_64";
-      targetOS = "darwin";
+      targetOS = "linux";
       type = "gem";
-    }
-      {
-        remotes = [ "https://rubygems.org" ];
-        sha256 = "0fxq22qjl1q0i7b2b6rspaibba6hrjj01zsambnq0wd32nakxxdl";
-        target = "x86_64-linux";
-        targetCPU = "x86_64";
-        targetOS = "linux";
-        type = "gem";
-      }
-      {
-        remotes = [ "https://rubygems.org" ];
-        sha256 = "0h4irjccgn86zvdy6p9whzh57wsrd6c6h9fqh3l9c7p7aj6i49bw";
-        target = "arm64-darwin";
-        targetCPU = "arm64";
-        targetOS = "darwin";
-        type = "gem";
-      }];
+    }];
     version = "1.6.6";
   };
   stimulus-rails = {

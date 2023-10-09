@@ -20,7 +20,7 @@ class TalliesController < ApplicationController
     completed = user_actions >= @namespace.action_quota
 
     if tally.save
-      response_object = { tally:, completed: }
+      response_object = { tally: tally, completed: completed }
       render json: response_object, status: :ok
     else
       render json: tally.errors, status: :unprocessable_entity
@@ -72,7 +72,7 @@ class TalliesController < ApplicationController
       end
 
       completed = (user_actions + 1) >= @namespace.action_quota
-      response_object = { tally:, completed: }
+      response_object = { tally: tally, completed: completed }
 
       render json: response_object, status: :ok
     else

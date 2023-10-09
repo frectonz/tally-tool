@@ -38,7 +38,7 @@
         gemset = import ./the-thing/gemset.nix;
 
         # See available versions here: https://github.com/bobvanderlinden/nixpkgs-ruby/blob/master/ruby/versions.json
-        ignoringVulns = x: x // { meta = (x.meta // { knownVulnerabilities = []; }); };
+        ignoringVulns = x: x // { meta = (x.meta // { knownVulnerabilities = [ ]; }); };
         ruby = pkgs."ruby-3.0.6".override {
           openssl = pkgs.openssl_1_1.overrideAttrs ignoringVulns;
         };

@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
     if @user.save
       session = @user.sessions.create
-      SessionMailer.with(session:).login_email.deliver_later
+      SessionMailer.with(session: session).login_email.deliver_later
       render(:email)
     else
       render(:register)
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 
     if @user
       session = @user.sessions.create
-      SessionMailer.with(session:).login_email.deliver_later
+      SessionMailer.with(session: session).login_email.deliver_later
       render(:email)
     else
       @error = "user was not found"
