@@ -28,7 +28,7 @@ init-infra:
   cd the-infra; terraform init
 
 apply-infra:
-  cd the-infra; terraform apply
+  cd the-infra; terraform apply -var="master_key=${RAILS_MASTER_KEY}"
 
 destroy-infra:
   cd the-infra; terraform destroy
@@ -36,5 +36,8 @@ destroy-infra:
 archive-the-thing:
   cd the-thing; git archive -o the-thing.zip HEAD
 
-setup: setup-terraform archive-the-thing init-infra apply-infra
+cleanup:
+  cd the-thing; rm the-thing.zip
+
+setup: setup-terraform archive-the-thing init-infra apply-infra cleanup
 destroy: destroy-infra destroy-terraform

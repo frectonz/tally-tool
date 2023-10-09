@@ -47,6 +47,18 @@ resource "aws_elastic_beanstalk_environment" "tally_tool_app_env" {
     name      = "IamInstanceProfile"
     value     = aws_iam_instance_profile.beanstalk_profile.name
   }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "RAILS_MASTER_KEY"
+    value     = var.master_key
+  }
+}
+
+variable "master_key" {
+  type        = string
+  sensitive   = true
+  description = "Ruby on Rails master key located in config/master.key"
 }
 
 resource "aws_iam_instance_profile" "beanstalk_profile" {

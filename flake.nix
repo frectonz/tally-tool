@@ -85,6 +85,8 @@
                 export AWS_SECRET_ACCESS_KEY=$(pass tally-tool/access-key-secret)
                 export AWS_DEFAULT_REGION=eu-west-3
                 export AWS_DEFAULT_OUTPUT=table
+
+                export RAILS_MASTER_KEY=$(cat the-thing/config/master.key)
               '';
           };
         };
