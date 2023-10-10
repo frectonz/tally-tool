@@ -28,10 +28,10 @@ init-infra:
   cd the-infra; terraform init
 
 apply-infra:
-  cd the-infra; terraform apply -var="master_key=${RAILS_MASTER_KEY}"
+  cd the-infra; terraform apply -var="master_key=${RAILS_MASTER_KEY}" -var="app_url=${APP_URL}"
 
 destroy-infra:
-  cd the-infra; terraform destroy -var="master_key=${RAILS_MASTER_KEY}"
+  cd the-infra; terraform destroy -var="master_key=${RAILS_MASTER_KEY}" -var="app_url=${APP_URL}"
 
 archive-the-thing:
   cd the-thing; git archive -o the-thing.zip HEAD

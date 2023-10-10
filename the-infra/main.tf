@@ -53,6 +53,24 @@ resource "aws_elastic_beanstalk_environment" "tally_tool_app_env" {
     name      = "RAILS_MASTER_KEY"
     value     = var.master_key
   }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "RAILS_MASTER_KEY"
+    value     = var.master_key
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "APP_URL"
+    value     = var.app_url
+  }
+}
+
+variable "app_url" {
+  type        = string
+  sensitive   = true
+  description = "Where is the app hosted"
 }
 
 variable "master_key" {

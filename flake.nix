@@ -87,6 +87,8 @@
                 export AWS_DEFAULT_OUTPUT=table
 
                 export RAILS_MASTER_KEY=$(cat the-thing/config/master.key)
+
+                export APP_URL=$(pass tally-tool/app-url)
               '';
           };
         };
