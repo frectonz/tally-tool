@@ -65,6 +65,24 @@ resource "aws_elastic_beanstalk_environment" "tally_tool_app_env" {
     name      = "APP_URL"
     value     = var.app_url
   }
+
+  setting {
+    namespace = "aws:elbv2:listener:443"
+    name      = "InstancePort"
+    value     = 80
+  }
+
+  setting {
+    namespace = "aws:elbv2:listener:443"
+    name      = "ListenerProtocol"
+    value     = "HTTPS"
+  }
+
+  setting {
+    namespace = "aws:elb:listener:443"
+    name      = "SSLCertificateId"
+    value     = "arn:aws:acm:eu-west-3:469569691863:certificate/fa394ef3-42b6-4b91-940a-5b5378436427"
+  }
 }
 
 variable "app_url" {
@@ -153,3 +171,32 @@ resource "aws_elastic_beanstalk_application_version" "beanstalk_app_version" {
   bucket = aws_s3_bucket.beanstalk_source.id
   key    = aws_s3_object.beanstalk_source_object.id
 }
+
+# resource "aws_lb_listener" "https_redirect" {
+#   load_balancer_arn = aws_elastic_beanstalk_environment.tally_tool_app_env.load_balancers[0].arn
+#   port              = 80
+#   protocol          = "HTTP"
+
+#   default_action {
+#     type = "redirect"
+
+#     redirect {
+#       port        = "443"
+#       protocol    = "HTTPS"
+#       status_code = "HTTP_301"
+#     }
+#   }
+# }
+
+# data "aws_lb" "eb_lb" {
+#   arn = aws_elastic_beanstalk_environment.tally_tool_app_env.load_balancers[0]
+# }
+
+# resource "aws_security_group_rule" "allow_80" {
+#   type              = "ingress"
+#   from_port         = 80
+#   to_port           = 80
+#   protocol          = "tcp"
+#   cidr_blocks       = ["0.0.0.0/0"]
+#   security_group_id = tolist(data.aws_lb.eb_lb.security_groups)[0]
+# }
