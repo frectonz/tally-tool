@@ -56,38 +56,31 @@ resource "aws_elastic_beanstalk_environment" "tally_tool_app_env" {
 
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
-    name      = "RAILS_MASTER_KEY"
-    value     = var.master_key
-  }
-
-  setting {
-    namespace = "aws:elasticbeanstalk:application:environment"
     name      = "APP_URL"
     value     = var.app_url
   }
 
-  setting {
-    namespace = "aws:elbv2:listener:443"
-    name      = "InstancePort"
-    value     = 80
-  }
+  # setting {
+  #   namespace = "aws:elbv2:listener:443"
+  #   name      = "InstancePort"
+  #   value     = 80
+  # }
 
-  setting {
-    namespace = "aws:elbv2:listener:443"
-    name      = "ListenerProtocol"
-    value     = "HTTPS"
-  }
+  # setting {
+  #   namespace = "aws:elbv2:listener:443"
+  #   name      = "ListenerProtocol"
+  #   value     = "HTTPS"
+  # }
 
-  setting {
-    namespace = "aws:elb:listener:443"
-    name      = "SSLCertificateId"
-    value     = "arn:aws:acm:eu-west-3:469569691863:certificate/fa394ef3-42b6-4b91-940a-5b5378436427"
-  }
+  # setting {
+  #   namespace = "aws:elb:listener:443"
+  #   name      = "SSLCertificateId"
+  #   value     = "arn:aws:acm:eu-west-3:469569691863:certificate/3c9a3441-27e1-407c-ae46-c5d5508836c9"
+  # }
 }
 
 variable "app_url" {
   type        = string
-  sensitive   = true
   description = "Where is the app hosted"
 }
 
