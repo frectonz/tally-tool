@@ -59,6 +59,30 @@ resource "aws_elastic_beanstalk_environment" "tally_tool_app_env" {
     name      = "APP_URL"
     value     = var.app_url
   }
+
+  setting {
+    namespace = "aws:elb:listener:443"
+    name      = "ListenerProtocol"
+    value     = "HTTPS"
+  }
+
+  setting {
+    namespace = "aws:elb:listener:443"
+    name      = "InstancePort"
+    value     = 80
+  }
+
+  setting {
+    namespace = "aws:elb:listener:443"
+    name      = "InstanceProtocol"
+    value     = "HTTP"
+  }
+
+  setting {
+    namespace = "aws:elb:listener:443"
+    name      = "SSLCertificateId"
+    value     = "arn:aws:acm:eu-west-3:469569691863:certificate/1f3e4e00-61cc-425b-bf2c-4f7893918654"
+  }
 }
 
 variable "app_url" {
