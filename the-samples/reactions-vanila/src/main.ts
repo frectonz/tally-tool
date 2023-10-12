@@ -1,7 +1,7 @@
 import "./style.css";
 import { TallyTool, Count } from "tally-tool";
 
-const tally = new TallyTool("http://localhost:3000");
+const tally = new TallyTool(import.meta.env.VITE_APP_URL);
 const reactions = tally.namespace("reactions");
 
 const countDivs = document.querySelectorAll(

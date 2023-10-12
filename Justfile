@@ -39,5 +39,14 @@ archive-the-thing:
 cleanup:
   cd the-thing; rm the-thing.zip
 
+reactions-react:
+  cd the-samples/reactions-react; VITE_APP_URL=${APP_URL} pnpm dev
+
+reactions-svelte:
+  cd the-samples/reactions-svelte; VITE_APP_URL=${APP_URL} pnpm dev
+
+reactions-vanila:
+  cd the-samples/reactions-vanila; VITE_APP_URL=${APP_URL} pnpm dev
+
 setup: setup-terraform archive-the-thing init-infra apply-infra cleanup
 destroy: destroy-infra destroy-terraform

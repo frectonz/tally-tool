@@ -88,7 +88,7 @@
 
                 export RAILS_MASTER_KEY=$(cat the-thing/config/master.key)
 
-                export APP_URL=$(pass tally-tool/app-url)
+                export APP_URL="https://tally-tool.frectonz.io"
               '';
           };
         };

@@ -1,7 +1,7 @@
 import { TallyTool } from "tally-tool";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 
-const tally = new TallyTool("http://localhost:3000");
+const tally = new TallyTool(import.meta.env.VITE_APP_URL);
 const reactions = tally.namespace("reactions");
 
 type TallyProps = {

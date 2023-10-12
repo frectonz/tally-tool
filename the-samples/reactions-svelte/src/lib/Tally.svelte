@@ -5,7 +5,7 @@
   export let name: string;
   export let image: string;
 
-  const tally = new TallyTool("http://localhost:3000")
+  const tally = new TallyTool(import.meta.env.VITE_APP_URL)
     .namespace("reactions")
     .tally(name);
 
