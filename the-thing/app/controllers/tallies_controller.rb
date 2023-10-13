@@ -17,7 +17,12 @@ class TalliesController < ApplicationController
     user_actions = (cookies[actions_cookie] || "0").to_i
 
     tally = @namespace.tallies.find_by(name: tally_name) || @namespace.tallies.new(name: tally_name)
-    completed = user_actions >= @namespace.action_quota
+
+    completed = if @namespace.action_quota == 0
+      false
+    else
+      user_actions >= @namespace.action_quota
+    end
 
     if tally.save
       response_object = { tally: tally, completed: completed }
@@ -71,7 +76,12 @@ class TalliesController < ApplicationController
         }
       end
 
-      completed = (user_actions + 1) >= @namespace.action_quota
+      completed = if @namespace.action_quota == 0
+        false
+      else
+        user_actions + 1 >= @namespace.action_quota
+      end
+
       response_object = { tally: tally, completed: completed }
 
       render json: response_object, status: :ok

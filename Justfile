@@ -33,6 +33,9 @@ apply-infra:
 destroy-infra:
   cd the-infra; terraform destroy -var="master_key=${RAILS_MASTER_KEY}" -var="app_url=${APP_URL}"
 
+run-the-thing:
+  cd the-thing; rails server
+
 archive-the-thing:
   cd the-thing; git archive -o the-thing.zip HEAD
 
