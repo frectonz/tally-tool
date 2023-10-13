@@ -96,8 +96,8 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options = {
-    host: "tally-tool.eu-west-3.elasticbeanstalk.com",
-    protocol: "http"
+    host: "tally-tool.frectonz.io",
+    protocol: "https"
   }
 
   config.action_mailer.smtp_settings = {
