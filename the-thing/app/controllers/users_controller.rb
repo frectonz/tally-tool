@@ -60,6 +60,11 @@ class UsersController < ApplicationController
     render :verify
   end
 
+  def logout
+    cookies.delete :session_id
+    redirect_to root_path
+  end
+
   private
     def user_params
       params.require(:user).permit(:username, :email)

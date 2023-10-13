@@ -8,7 +8,9 @@
     </a>
 
     <nav class="header__nav">
-      <a href="/logout" class="btn btn-primary">log out</a>
+      <%= form_tag logout_path, method: :post, style: "min-width: unset;" do %>
+        <%= submit_tag "Logout", class: "btn btn-primary" %>
+      <% end %>
     </nav>
   </div>
 </header>
