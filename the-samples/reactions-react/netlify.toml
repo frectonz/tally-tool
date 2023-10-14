@@ -3,5 +3,11 @@
   publish = "dist"
   command = "pnpm build"
 
-[build.environment]
+[context.production.environment]
+  VITE_APP_URL = "https://tally-tool.frectonz.io"
+
+[context.deploy-preview.environment]
+  VITE_APP_URL = "https://tally-tool.frectonz.io"
+
+[context.branch-deploy.environment]
   VITE_APP_URL = "https://tally-tool.frectonz.io"
