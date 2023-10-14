@@ -27,17 +27,13 @@ function Tally({ name, image }: TallyProps) {
     },
   });
 
-  if (!data) {
-    return null;
-  }
-
   return (
     <div className="card">
       <img src={image} />
-      <h2>{data.tally.count}</h2>
+      <h2>{data?.tally.count}</h2>
       <div className="btns">
-        <button disabled={data.completed} onClick={() => inc.mutate()}> + </button>
-        <button disabled={data.completed} onClick={() => dec.mutate()}> - </button>
+        <button disabled={data?.completed} onClick={() => inc.mutate()}> + </button>
+        <button disabled={data?.completed} onClick={() => dec.mutate()}> - </button>
       </div>
     </div>
   );
