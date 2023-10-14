@@ -1,5 +1,5 @@
 [build]
-  base = "the-samples/reactions-react"
+  base = "the-samples/reactions-vanila"
   publish = "dist"
   command = "pnpm build"
 
