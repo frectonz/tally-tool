@@ -1,0 +1,7 @@
+[build]
+  base = "the-samples/reactions-react"
+  publish = "dist"
+  command = "pnpm build"
+
+  [environment]
+    VITE_APP_URL = "https://tally-tool.frectonz.io"
