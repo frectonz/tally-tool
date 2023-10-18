@@ -23,11 +23,29 @@
         flake-utils.follows = "fu";
       };
     };
+
+    devenv = {
+      url = "github:cachix/devenv/v0.6.3";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, fu, ruby-nix, bundix, bob-ruby }:
-    with fu.lib;
-    eachDefaultSystem (system:
+  nixConfig = {
+    extra-trusted-public-keys = "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=";
+    extra-substituters = "https://devenv.cachix.org";
+  };
+
+  outputs =
+    inputs @ { self
+    , nixpkgs
+    , fu
+    , ruby-nix
+    , bundix
+    , bob-ruby
+    , devenv
+    }:
+      with fu.lib;
+      eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {
           inherit system;
@@ -56,6 +74,7 @@
       in
       {
         devShells = {
+
           default = pkgs.mkShell {
             buildInputs = (
               let
@@ -90,6 +109,24 @@
 
                 export APP_URL="https://tally-tool.frectonz.io"
               '';
+          };
+
+          devenv = devenv.lib.mkShell {
+            inherit inputs pkgs;
+            modules = [
+              {
+                services.postgres = {
+                  enable = true;
+                  createDatabase = false;
+                  initialDatabases = [{ name = "tally_tool_dev"; }];
+                  initialScript = ''
+                    CREATE USER postgres WITH SUPERUSER PASSWORD 'password';
+                  '';
+                  listen_addresses = "127.0.0.1";
+                  port = 5432;
+                };
+              }
+            ];
           };
         };
 
