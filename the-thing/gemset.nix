@@ -729,6 +729,18 @@
     targets = [ ];
     version = "3.2.2.4";
   };
+  pg = {
+    groups = [ "default" ];
+    platforms = [ ];
+    source = {
+      remotes = [ "https://rubygems.org" ];
+      sha256 = "0pfj771p5a29yyyw58qacks464sl86d5m3jxjl5rlqqw2m3v5xq4";
+      target = "ruby";
+      type = "gem";
+    };
+    targets = [ ];
+    version = "1.5.4";
+  };
   psych = {
     dependencies = [ "stringio" ];
     groups = [ "default" "development" "test" ];
@@ -1180,26 +1192,6 @@
     };
     targets = [ ];
     version = "3.4.2";
-  };
-  sqlite3 = {
-    dependencies = [ "mini_portile2" ];
-    groups = [ "default" ];
-    platforms = [ ];
-    source = {
-      remotes = [ "https://rubygems.org" ];
-      sha256 = "15415lmz69jbzl6nch4q5l2jxv054676nk6y0vgy0g3iklmjrxvc";
-      target = "ruby";
-      type = "gem";
-    };
-    targets = [{
-      remotes = [ "https://rubygems.org" ];
-      sha256 = "0fxq22qjl1q0i7b2b6rspaibba6hrjj01zsambnq0wd32nakxxdl";
-      target = "x86_64-linux";
-      targetCPU = "x86_64";
-      targetOS = "linux";
-      type = "gem";
-    }];
-    version = "1.6.6";
   };
   stimulus-rails = {
     dependencies = [ "railties" ];
