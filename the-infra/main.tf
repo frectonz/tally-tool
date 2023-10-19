@@ -61,6 +61,12 @@ resource "aws_elastic_beanstalk_environment" "tally_tool_app_env" {
   }
 
   setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "TALLY_TOOL_DATABASE_PASSWORD"
+    value     = var.db_password
+  }
+
+  setting {
     namespace = "aws:elb:listener:443"
     name      = "ListenerProtocol"
     value     = "HTTPS"
@@ -169,4 +175,22 @@ resource "aws_elastic_beanstalk_application_version" "beanstalk_app_version" {
 
   bucket = aws_s3_bucket.beanstalk_source.id
   key    = aws_s3_object.beanstalk_source_object.id
+}
+
+resource "aws_db_instance" "tally_tool_prod_db" {
+  identifier          = "tally-tool"
+  instance_class      = "db.t3.micro"
+  allocated_storage   = 1 // in GBs
+  apply_immediately   = true
+  skip_final_snapshot = true
+  engine              = "postgres"
+  username            = "tally_tool"
+  password            = var.db_password
+  db_name             = "tally_tool_prod"
+}
+
+variable "db_password" {
+  type        = string
+  sensitive   = true
+  description = "Password for the Tally Tool production DB"
 }

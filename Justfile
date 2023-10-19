@@ -27,11 +27,14 @@ destroy-terraform: delete-terraform-bucket delete-terraform-dynamodb
 init-infra:
   cd the-infra; terraform init
 
+plan-infra:
+  cd the-infra; terraform plan -var="master_key=${RAILS_MASTER_KEY}" -var="app_url=${APP_URL}" -var="db_password=${DB_PASSWORD}"
+
 apply-infra:
-  cd the-infra; terraform apply -var="master_key=${RAILS_MASTER_KEY}" -var="app_url=${APP_URL}"
+  cd the-infra; terraform apply -var="master_key=${RAILS_MASTER_KEY}" -var="app_url=${APP_URL}" -var="db_password=${DB_PASSWORD}"
 
 destroy-infra:
-  cd the-infra; terraform destroy -var="master_key=${RAILS_MASTER_KEY}" -var="app_url=${APP_URL}"
+  cd the-infra; terraform destroy -var="master_key=${RAILS_MASTER_KEY}" -var="app_url=${APP_URL}" -var="db_password=${DB_PASSWORD}"
 
 run-the-thing:
   cd the-thing; rails server
