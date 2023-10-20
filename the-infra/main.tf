@@ -180,7 +180,7 @@ resource "aws_elastic_beanstalk_application_version" "beanstalk_app_version" {
 resource "aws_db_instance" "tally_tool_prod_db" {
   identifier          = "tally-tool"
   instance_class      = "db.t3.micro"
-  allocated_storage   = 1 // in GBs
+  allocated_storage   = 5 // in GBs
   apply_immediately   = true
   skip_final_snapshot = true
   engine              = "postgres"
