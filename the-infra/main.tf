@@ -61,12 +61,6 @@ resource "aws_elastic_beanstalk_environment" "tally_tool_app_env" {
   }
 
   setting {
-    namespace = "aws:elasticbeanstalk:application:environment"
-    name      = "TALLY_TOOL_DATABASE_PASSWORD"
-    value     = var.db_password
-  }
-
-  setting {
     namespace = "aws:elb:listener:443"
     name      = "ListenerProtocol"
     value     = "HTTPS"
