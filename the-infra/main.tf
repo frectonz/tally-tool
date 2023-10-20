@@ -89,6 +89,56 @@ resource "aws_elastic_beanstalk_environment" "tally_tool_app_env" {
     name      = "SSLCertificateId"
     value     = "arn:aws:acm:eu-west-3:469569691863:certificate/1f3e4e00-61cc-425b-bf2c-4f7893918654"
   }
+
+  # Database Configuration
+
+  setting {
+    namespace = "aws:rds:dbinstance"
+    name      = "HasCoupledDatabase"
+    value     = "true"
+  }
+
+  setting {
+    namespace = "aws:rds:dbinstance"
+    name      = "DBEngine"
+    value     = "postgres"
+  }
+
+  setting {
+    namespace = "aws:rds:dbinstance"
+    name      = "DBEngineVersion"
+    value     = "15.3"
+  }
+
+  setting {
+    namespace = "aws:rds:dbinstance"
+    name      = "DBInstanceClass"
+    value     = "db.t3.micro"
+  }
+
+  setting {
+    namespace = "aws:rds:dbinstance"
+    name      = "DBAllocatedStorage"
+    value     = "5"
+  }
+
+  setting {
+    namespace = "aws:rds:dbinstance"
+    name      = "DBDeletionPolicy"
+    value     = "Delete"
+  }
+
+  setting {
+    namespace = "aws:rds:dbinstance"
+    name      = "DBUser"
+    value     = "TallyTool"
+  }
+
+  setting {
+    namespace = "aws:rds:dbinstance"
+    name      = "DBPassword"
+    value     = var.db_password
+  }
 }
 
 variable "app_url" {
@@ -100,6 +150,12 @@ variable "master_key" {
   type        = string
   sensitive   = true
   description = "Ruby on Rails master key located in config/master.key"
+}
+
+variable "db_password" {
+  type        = string
+  sensitive   = true
+  description = "Password for the Tally Tool production DB"
 }
 
 resource "aws_iam_instance_profile" "beanstalk_profile" {
@@ -175,22 +231,4 @@ resource "aws_elastic_beanstalk_application_version" "beanstalk_app_version" {
 
   bucket = aws_s3_bucket.beanstalk_source.id
   key    = aws_s3_object.beanstalk_source_object.id
-}
-
-resource "aws_db_instance" "tally_tool_prod_db" {
-  identifier          = "tally-tool"
-  instance_class      = "db.t3.micro"
-  allocated_storage   = 5 // in GBs
-  apply_immediately   = true
-  skip_final_snapshot = true
-  engine              = "postgres"
-  username            = "tally_tool"
-  password            = var.db_password
-  db_name             = "tally_tool_prod"
-}
-
-variable "db_password" {
-  type        = string
-  sensitive   = true
-  description = "Password for the Tally Tool production DB"
 }
