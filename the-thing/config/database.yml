@@ -66,6 +66,8 @@ test:
 #
 production:
   <<: *default
-  database: tally_tool_prod
-  username: tally_tool
+  host: <%= ENV["RDS_HOSTNAME"] %>
+  port: <%= ENV["RDS_PORT"] %>
+  database: <%= ENV["RDS_DB_NAME"] %>
+  username: TallyTool
   password: <%= ENV["TALLY_TOOL_DATABASE_PASSWORD"] %>
