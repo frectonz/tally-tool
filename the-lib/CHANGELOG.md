@@ -1,5 +1,11 @@
 # tally-tool
 
+## 0.3.1
+
+### Patch Changes
+
+- 0fc658b: only update localstorage for successful requests
+
 ## 0.3.0
 
 ### Minor Changes
