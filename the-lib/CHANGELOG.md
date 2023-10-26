@@ -1,5 +1,11 @@
 # tally-tool
 
+## 0.3.2
+
+### Patch Changes
+
+- f7478c0: fix bug: don't decrement user actions
+
 ## 0.3.1
 
 ### Patch Changes
