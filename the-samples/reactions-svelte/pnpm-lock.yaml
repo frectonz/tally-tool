@@ -7,7 +7,7 @@ settings:
 dependencies:
   tally-tool:
     specifier: latest
-    version: 0.3.1
+    version: 0.3.2
 
 devDependencies:
   '@sveltejs/vite-plugin-svelte':
@@ -916,8 +916,8 @@ packages:
       periscopic: 3.1.0
     dev: true
 
-  /tally-tool@0.3.1:
-    resolution: {integrity: sha512-3MAax4yRaLyRTthhIRGq9wq4VS76M9SM3Kq5/Bf93PFsotCIlabVn2unCp5vdzgR9t72fit58W/Ua8Pd0divJw==}
+  /tally-tool@0.3.2:
+    resolution: {integrity: sha512-sZJ7DGtpLO5rR9iBk2rOwJDdZg/kG9tKupCX+tOrAWb4qZ1OqIJzK8ASmwqcEo8h7xrKUrUydpvM+/GYgQkRXg==}
     dev: false
 
   /to-regex-range@5.0.1:
