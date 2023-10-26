@@ -87,7 +87,7 @@ export class Tally {
     })
       .then((res) => res.json())
       .then((res) => {
-        decUserActions(this.namespace, this.count);
+        incUserActions(this.namespace, this.count);
         return res;
       });
 
@@ -105,10 +105,5 @@ function getUserActions(namespace: string, count: string) {
 
 function incUserActions(namespace: string, count: string) {
   const actions = getUserActions(namespace, count) + 1;
-  localStorage.setItem(userActionsKey(namespace, count), actions.toString());
-}
-
-function decUserActions(namespace: string, count: string) {
-  const actions = getUserActions(namespace, count) - 1;
   localStorage.setItem(userActionsKey(namespace, count), actions.toString());
 }
