@@ -2,10 +2,9 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "http://localhost:5173"
+    origins "*"
     resource "/namespaces/*/tallies/*",
              headers: :any,
-             methods: %i[get post patch put],
-             credentials: true
+             methods: %i[get post patch put]
   end
 end

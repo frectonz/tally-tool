@@ -108,7 +108,7 @@
                 export RAILS_MASTER_KEY=$(cat the-thing/config/master.key)
                 export DB_PASSWORD=$(pass tally-tool/db-password)
 
-                export APP_URL="https://tally-tool.frectonz.io"
+                export APP_URL="http://localhost:3000"
               '';
           };
 

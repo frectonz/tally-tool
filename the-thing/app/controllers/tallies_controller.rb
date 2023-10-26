@@ -2,6 +2,8 @@
 
 class TalliesController < ApplicationController
   before_action :set_namespace
+  before_action :set_tally, only: %i[show update]
+  before_action :set_user_actions, only: %i[show update]
   skip_before_action :verify_authenticity_token, only: %i[create update]
 
   # GET /namespaces/:id/tallies/
@@ -11,30 +13,23 @@ class TalliesController < ApplicationController
 
   # GET /namespaces/:id/tallies/:id
   def show
-    tally_name = params[:id]
-
-    actions_cookie = "#{@namespace.name}_#{tally_name}-actions"
-    user_actions = (cookies[actions_cookie] || "0").to_i
-
-    tally = @namespace.tallies.find_by(name: tally_name) || @namespace.tallies.new(name: tally_name)
-
     completed = if @namespace.action_quota == 0
       false
     else
-      user_actions >= @namespace.action_quota
+      @user_actions >= @namespace.action_quota
     end
 
-    if tally.save
-      response_object = { tally: tally, completed: completed }
+    if @tally.save
+      response_object = { tally: @tally, completed: completed }
       render json: response_object, status: :ok
     else
-      render json: tally.errors, status: :unprocessable_entity
+      render json: @tally.errors, status: :unprocessable_entity
     end
   end
 
   # POST /namespaces/:id/tallies
   def create
-    tally = @namespace.tallies.new name: params[:name]
+    tally = @namespace.tallies.new(name: params[:name])
 
     if tally.save
       render json: tally, status: :created
@@ -45,48 +40,33 @@ class TalliesController < ApplicationController
 
   # PATCH/PUT /namespaces/:id/tallies/:id?op=(INC|DEC)
   def update
-    tally_name = params[:id]
-
-    actions_cookie = "#{@namespace.name}_#{tally_name}-actions"
-    user_actions = (cookies[actions_cookie] || "0").to_i
-
-    if (@namespace.action_quota != 0) && (user_actions >= @namespace.action_quota)
+    if (@namespace.action_quota != 0) && (@user_actions >= @namespace.action_quota)
       render json: { error: "Reached action quota" } and return
     end
 
-    tally = @namespace.tallies.find_by(name: tally_name) || @namespace.tallies.new(name: tally_name)
     operation = params[:op]
-
     case operation
     when "INC"
-      tally.count += 1
+      @tally.count += 1
     when "DEC"
-      tally.count -= 1
+      @tally.count -= 1
     else
       render json: {
         error: "The `op` query parameter must be one of the following values: INC, DEC."
       }, status: :bad_request and return
     end
 
-    if tally.save
-      unless @namespace.action_quota.zero?
-        cookies[actions_cookie] = {
-          value: user_actions + 1,
-          expires: 1.year.from_now
-        }
-      end
-
+    if @tally.save
       completed = if @namespace.action_quota == 0
         false
       else
-        user_actions + 1 >= @namespace.action_quota
+        @user_actions + 1 >= @namespace.action_quota
       end
 
-      response_object = { tally: tally, completed: completed }
-
+      response_object = { tally: @tally, completed: completed }
       render json: response_object, status: :ok
     else
-      render json: tally.errors, status: :unprocessable_entity
+      render json: @tally.errors, status: :unprocessable_entity
     end
   end
 
@@ -96,5 +76,14 @@ class TalliesController < ApplicationController
       return if @namespace
 
       render json: { error: "Namespace not found" }, status: :not_found
+    end
+
+    def set_tally
+      @tally = @namespace.tallies.find_by(name: params[:id]) || @namespace.tallies.new(name: params[:id])
+    end
+
+    def set_user_actions
+      user_actions = request.headers["X-User-Actions"]
+      @user_actions = (user_actions || "0").to_i
     end
 end
