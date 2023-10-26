@@ -64,13 +64,16 @@ export class Tally {
     const url = `${this.apiDomain}/namespaces/${this.namespace}/tallies/${this.count}?op=INC`;
 
     const actions = getUserActions(this.namespace, this.count);
-    const res = await fetch(url, {
+    const data = await fetch(url, {
       method: "put",
       headers: { [USER_ACTIONS_HEADER]: actions.toString() },
-    });
-    incUserActions(this.namespace, this.count);
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        incUserActions(this.namespace, this.count);
+        return res;
+      });
 
-    const data = await res.json();
     return makeCount(data);
   }
 
@@ -78,13 +81,16 @@ export class Tally {
     const url = `${this.apiDomain}/namespaces/${this.namespace}/tallies/${this.count}?op=DEC`;
 
     const actions = getUserActions(this.namespace, this.count);
-    const res = await fetch(url, {
+    const data = await fetch(url, {
       method: "put",
       headers: { [USER_ACTIONS_HEADER]: actions.toString() },
-    });
-    decUserActions(this.namespace, this.count);
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        decUserActions(this.namespace, this.count);
+        return res;
+      });
 
-    const data = await res.json();
     return makeCount(data);
   }
 }
