@@ -1,5 +1,11 @@
 # tally-tool
 
+## 0.3.0
+
+### Minor Changes
+
+- f406c04: send user actions via headers instead of cookies
+
 ## 0.2.0
 
 ### Minor Changes
